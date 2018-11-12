@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>wish</title>
+</head>
+<body>
+    <div class="container">
+        <div class='header'>
+            <h1 id="title">Santa's helper</h1>
+            <div id="greeting">
+                <h3>Happy Holidays Hope!</h3>
+                <button>Log Out</button>
+            </div>
+        </div>
+        <div class="tab">
+            <button class="tablinks" onclick="location.replace('./gifts.html')">Gifts</button>
+            <button class="tablinks" onclick="location.replace('./wishes.html')">Wish</button>
+            <button class="tablinks" onclick="location.replace('./cards.html')">Cards</button>
+            <button class="tablinks" onclick="location.replace('./recipes.html')">Recipes</button>
+            <button class="tablinks" onclick="location.replace('./groceries.html')">Groceries</button>
+            <button class="tablinks" onclick="location.replace('./events.html')">Events</button>
+        </div>
+        <h1>Wish List</h1>
+        <div class="results">
+            <div class="left">
+                <h2>Your Lists:</h2>
+                <hr>
+                <div id="listDivWish">
+                    <h2>Lexy</h2>
+                </div>
+                <button onclick="newWishList()">make new list</button>
+                <p>When you create a new list, the center part should switch to that empty list.  Also, by clicking on list title above, it should pull it up in the center</p>
+            </div>
+            <div class="right">
+                <button class="delete-list">Delete List</button>
+                <h2>Wish List for Lexy</h2>
+                <table id="wishTable">
+                    <tr>
+                        <th>Bought</th>
+                        <th>Item</th>
+                        <th>Store/Website</th>
+                        <th>Price</th>
+                        <th>Option(s)</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="bought" value="false"><br></td>
+                        <td>Fortnight Pjs</td>
+                        <td>Amazon.com</td>
+                        <td>$19.99</td>
+                        <td>size: XL</td>
+                        <td><input type="checkbox" name="edit" value="true"><br></td>
+                        <td><input type="checkbox" name="delete" value="true"><br></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="bought" value="false"><br></td>
+                        <td>Headphones</td>
+                        <td>Target</td>
+                        <td>$35.99</td>
+                        <td>Blue</td>
+                        <td><input type="checkbox" name="edit" value="true"><br></td>
+                        <td><input type="checkbox" name="delete" value="true"><br></td>
+                    </tr>
+                </table>
+                    <tr>
+                        <td><input id="wishItem" type="text" placeholder="item"></td>
+                        <td><input id="wishStore" type="text" placeholder="store/website"></td>
+                        <td><input id="wishPrice" type="text" placeholder="price"></td>
+                        <td><input id="wishOption" type="text" placeholder="options"></td>
+                        <td><button onclick="addWishListItem()">Add to list</button></td>
+                    </tr>
+                <hr>
+                Items Bought
+                <table id="giftTable">
+                    <tr>
+                        <th></th>
+                        <th>Item</th>
+                        <th>Store/Website</th>
+                        <th>Price</th>
+                        <th>Option(s)</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr class="bought">
+                        <td></td>
+                        <td>XBox Controller</td>
+                        <td>Best Buy</td>
+                        <td>$40.00</td>
+                        <td>red</td>
+                        <td><input type="checkbox" name="edit" value="true"><br></td>
+                        <td><input type="checkbox" name="delete" value="true"><br></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class='modal3'>
+            <label for="list name">Who is Wish List for?</label>
+            <input id="wish-title" type="text">
+            <button onclick="addWishList()">Create List</button>
+          </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./logic.js"></script>
+</body>
+</html>

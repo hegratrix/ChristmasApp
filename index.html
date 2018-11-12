@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./style.css">
+  <title>Christmas Organizer</title>
+</head>
+<body>
+  <div class="container">
+    <div class='header'>
+      <h1 id="title">Santa's helper</h1>
+      <div id="greeting">
+          <h3>Happy Holidays Hope!</h3>
+          <button onclick="startList()">Log Out</button>
+      </div>
+    </div>
+    <h1>Welcome to Christmas Organizer!</h1>
+    <h3>Pretend you see a carousel! each piece below a slide</h3>
+    <div class="carousel">
+        <h2>Gifts</h2>
+        <p>Remember the people you need to shop for</p>
+        <button onclick="startList('gifts')">start now</button>
+    </div>
+    <div class="carousel">
+        <h2>Wishes</h2>
+        <p>Make wish lists for the special people</p>
+        <button onclick="startList('wishes')">start now</button>
+    </div>
+    <div class="carousel">
+        <h2>Cards</h2>
+        <p>All the info you need to send your holiday greetings</p>
+        <button onclick="startList('cards')">start now</button>
+    </div>
+    <div class="carousel">
+        <h2>Recipes</h2>
+        <p>Keep your holiday recipes in one place</p>
+        <button onclick="startList('recipes')">start now</button>
+    </div>
+    <div class="carousel">
+        <h2>Groceries</h2>
+        <p>Don't forget the ingredients to make serve up something delicious</p>
+        <button onclick="startList('groceries')">start now</button>
+    </div>
+    <div class="carousel">
+        <h2>Events</h2>
+        <p>Enjoy all the fun and don't forget to wear that ugly sweater</p>
+        <button onclick="startList('events')">start now</button>
+    </div>
+
+    <div class='modal'>
+      <h2>This is where you would sign in if you haven't already.  If your are signed in, it'll go straight to the list.  For now just click the button.</h2>
+      <button onclick="signIn()">Sign In</button>
+    </div>
+  </div>
+  
+  <script src="jquery-3.3.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./logic.js"></script>
+</body>
+</html>
