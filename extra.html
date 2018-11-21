@@ -1,0 +1,53 @@
+<div id="show-wish-details">
+        <table id="wish-table">
+            <tr>
+                <th>Bought</th>
+                <th>Item</th>
+                <th>Store/Website</th>
+                <th>Cost</th>
+                <th>Options</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="bought" value="false"><br></td>
+                <td>Fortnight Pjs</td>
+                <td>Amazon.com</td>
+                <td>$19.99</td>
+                <td>size: XL</td>
+                <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
+                <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+            </tr>
+        </table>                        
+        <p>edit button onclick=editWishItem(), delete button onclick=deleteWishItem()</p>
+        <p>where bought=false goes table id="wish-table"</p>
+        <div class='grid-x'>
+            <div class='medium-1 cell'></div>
+            <div class='medium-2 cell'><input id="wishItem" type="text" placeholder="Item"></div>
+            <div class='medium-2 cell'><input id="wishStore" type="text" placeholder="Store/Website"></div>
+            <div class='medium-2 cell'><input id="wishCost" type="text" placeholder="Cost"></div>
+            <div class='medium-2 cell'><input id="wishOptions" type="text" placeholder="Options"></div>
+            <div class='medium-2 cell'><button class="add-to-table" onclick="addWishItem()">Add</button></div>
+            <div class='medium-1 cell'></div>
+        </div> 
+        <p>onclick="addWishItem()</p>
+    </div>
+    <div id="show-wish-done">
+        <table id="wish-table-done">
+            <tr>
+                th>Bought</th>
+                <th>Item</th>
+                <th>Store/Website</th>
+                <th>Cost</th>
+                <th>Options</th>
+            </tr>
+            <tr>
+                <td>Headphones</td>
+                <td>Target</td>
+                <td>$35.99</td>
+                <td>Blue</td>
+                <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
+                <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+            </tr>
+        </table> 
+        <p>where bought=true goes table id="wish-table-done"</p>
+    </div>
+</div>

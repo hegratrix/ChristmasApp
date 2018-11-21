@@ -4,106 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./style.css">
-    <title>gifts</title>
+    <link rel="shortcut icon" type="image/png" href="./images/drake.jpg">
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/foundation.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Mountains+of+Christmas" rel="stylesheet">
+    <title>Gifts</title>
 </head>
 <body>
-    <div class="container">
-        <div class='header'>
-            <h1 id="title">Santa's helper</h1>
-            <div id="greeting">
-                <h3>Happy Holidays Hope!</h3>
-                <button>Log Out</button>
-            </div>
-        </div>
-        <div class="tab">
-            <button class="tablinks" onclick="location.replace('./gifts.html')">Gifts</button>
-            <button class="tablinks" onclick="location.replace('./wishes.html')">Wish</button>
-            <button class="tablinks" onclick="location.replace('./cards.html')">Cards</button>
-            <button class="tablinks" onclick="location.replace('./recipes.html')">Recipes</button>
-            <button class="tablinks" onclick="location.replace('./groceries.html')">Groceries</button>
-            <button class="tablinks" onclick="location.replace('./events.html')">Events</button>
-        </div>
-        <h1>Gift List</h1>
-        <div class="results">
-            <div class="left">
-                <h2>Your Lists:</h2>
-                <hr>
-                <div id="listDiv">
-                    <h2>family</h2>
+    <div class='grid-y grid-frame'>
+        <div class='countdown-div cell shrink header medium-cell-block-container'>
+            <div class='grid-x'>
+                <div class='medium-1 cell'>
                 </div>
-                <button onclick="newGiftList()">make new list</button>
-                <p>When you create a new list, the center part should switch to that empty list.  Also, by clicking on list title above, it should pull it up in the center</p>
-                <p>When you check the box, it would be nice to have a modal pop up and ask what you bought so it can add it to the table and display it below in bought section</p>
-            </div>
-            <div class="right">
-                <button class="delete-list">Delete List</button>
-                <h2>Family List</h2>
-                GIFTS TO BUY (when box is checked will move it below)
-                <table id="giftTable">
-                    <tr>
-                        <th>Bought</th>
-                        <th>Name</th>
-                        <th>Budget</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="bought" value="false"><br></td>
-                        <td>Grandma</td>
-                        <td>$25</td>
-                        <td><input type="checkbox" name="edit" value="true"><br></td>
-                        <td><input type="checkbox" name="delete" value="true"><br></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="bought" value="false"><br></td>
-                        <td>Mom</td>
-                        <td>$2500</td>
-                        <td><input type="checkbox" name="edit" value="true"><br></td>
-                        <td><input type="checkbox" name="delete" value="true"><br></td>
-                    </tr>
-                </table>
-                    <tr>
-                        <td><input id="giftRecepient" type="text" placeholder="name"></td>
-                        <td><input id="giftRecepientBudget" type="text" placeholder="budget"></td>
-                        <td><button onclick="addPersonGiftList()">Add to list</button></td>
-                    </tr>
-                <hr>
-                GIFTS BOUGHT
-                <table id="giftTable">
-                    <tr>
-                        <th>Name</th>
-                        <th>Item</th>
-                        <th>Budget</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr class="bought">
-                        <td>Sarah</td>
-                        <td>necklace</td>
-                        <td>$30</td>
-                        <td><input type="checkbox" name="edit" value="true"><br></td>
-                        <td><input type="checkbox" name="delete" value="true"><br></td>
-                    </tr>
-                    <tr class="bought">
-                            <td>Dad</td>
-                            <td>camping gear</td>
-                            <td>$50</td>
-                            <td><input type="checkbox" name="edit" value="true"><br></td>
-                            <td><input type="checkbox" name="delete" value="true"><br></td>
-                        </tr>
-                </table>
+                <div class='countdown medium-11 cell'>
+                </div>
             </div>
         </div>
-
-        <div class='modal2'>
-            <label for="list name">Title of List</label>
-            <input id="gift-title" type="text">
-            <button onclick="addGiftList()">Create List</button>
-          </div>
+        <div class='header-div grid-x'>
+                <div class='medium-1 cell'>
+                </div>
+                <div class='medium-1 cell'>
+                    <img class="logoElf" src="./images/logoElf.png" alt="elf">
+                </div>
+                <div class="medium-3 cell">
+                    <h3 class="app-title">One Organized Elf</h3>
+                </div>
+                <div class='medium-5'>
+                </div>
+                <div class="log-in-div medium-1 cell">
+                    <button href="#" class="log-in-button">Log In</button>
+                    <a href="#" height="30" width="30" alt=""><i class="fa fa-info-circle"></i></a>
+                    <a class="sign-up" href="">Sign Up</a>
+                </div>
+                <div class='medium-1'>
+                </div>
+        </div>
+        <div class='grid-y medium-grid-frame'>
+            <div class='bottom-div grid-x'>
+                <div class='decor-div medium-1 cell'>
+                </div>
+                <div class='list-div medium-3 cell'>
+                    <h1 class="list-title">Lists</h1><hr class='hr'>
+                    <div id='add-gift-list'>
+                        <p>where list titles go: div id='add-gift-list'</p>
+                    </div>
+                    <button class='add-to-list' onclick='addToWishList()'>New List</button>
+                    <p>onclick='addToWishList()</p>
+                </div>
+                <div class='main-content-div medium-7 cell'>
+                    <ul class="menu-lines menu menu-hover-lines">
+                        <li><a href="./index.html">Home</a></li>
+                        <li class="active"><a href="./gifts.html">Gifts</a></li>
+                        <li><a href="./wishes.html">Wishes</a></li>
+                        <li><a href="./cards.html">Cards</a></li>
+                        <li><a href="./recipes.html">Recipes</a></li>
+                        <li><a href="./groceries.html">Groceries</a></li>
+                        <li><a href="./calendar.html">Calendar</a></li>
+                    </ul>
+                    <h1 class="list-title">Gift List</h1>
+                    <div id="show-gift-details">
+                        <table id="gift-table">
+                            <tr>
+                                <th>Bought</th>
+                                <th>Name</th>
+                                <th>Budget</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="bought" value="false"><br></td>
+                                <td>Grandma</td>
+                                <td>$25</td>
+                                <td><button class="add-to-table" onclick="editGiftItem()">Edit</button></td>
+                                <td><button class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                            </tr>
+                        </table>                        
+                        <p>edit button onclick= editGiftItem(), delete button onclick=deleteGiftItem()</p>
+                        <p>where bought=false goes table id="gift-table"</p>
+                        <div class='grid-x'>
+                            <div class='medium-1 cell'></div>
+                            <div class='medium-4 cell'><input id="giftName" type="text" placeholder="Name"></div>
+                            <div class='medium-4 cell'><input id="giftBudget" type="text" placeholder="Budget"></div>
+                            <div class='medium-2 cell'><button class="add-to-table" onclick="addGiftItem()">Add</button></div>
+                            <div class='medium-1 cell'></div>
+                        </div> 
+                        <p>onclick="addGiftItem()</p>
+                    </div>
+                    <div id="show-gift-done">
+                        <table id="gift-table-done">
+                            <tr>
+                                <th>Bought</th>
+                                <th>Gift</th>
+                            </tr>
+                            <tr>
+                                <td>Grandma</td>
+                                <td>Necklace</td>
+                                <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
+                                <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                            </tr>
+                        </table> 
+                        <p>where bought=true goes table id="gift-table-done"</p>
+                    </div>
+                </div>
+                <div class='decor-div medium-1 cell'>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./logic.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/vendor/foundation.js"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="./js/vendor/what-input.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <script>window.onload = showDate()</script>
 </body>
 </html>

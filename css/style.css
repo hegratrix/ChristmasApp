@@ -1,0 +1,122 @@
+.header-div {
+    background-image: url('../images/5.jpg');
+}
+
+.decor-div {
+    background-image: url("../images/3.jpg");
+    background-size: cover;
+}
+
+.list-div {
+    background-color: #7abd20;
+}
+
+.bottom-div {
+    height: 100%;
+}
+
+.countdown {
+    text-align: center;
+    font-family: 'Mountains of Christmas', cursive;
+    font-size: 30px;
+    font-weight: 600;
+    padding: 5px;
+  }
+
+.countdown-div {
+    background-image: url('../images/6.jpg')
+}
+
+.logoElf {
+    position: absolute;
+    height: 125px;
+    z-index: 1;
+    margin-top: -40px;
+}
+
+.app-title {
+    font-size: 40px;
+    padding-top: 10px;
+    padding-bottom: 35px;
+    color: white;
+    font-family: 'Aref Ruqaa', serif;
+  }
+
+.log-in-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 9px;
+}
+
+.log-in-button {
+    padding: 13px;
+    font-size: 20px;
+    color: white;
+    border: 1px solid white;
+}
+
+.log-in-button:hover {
+    background-color: #7abd20;
+    color: #b60a0a;
+}
+
+.sign-up {
+    color: white;
+}
+
+.list-title {
+    text-align: center;
+    font-family: 'Aref Ruqaa', serif;
+}
+
+.hr { 
+    border-bottom: 1px solid #375c00;
+}
+
+.add-to-list {
+    border-radius: 50%;
+    height: 50px;
+    width: 80px;
+    color: white;
+    font-weight: bold;
+    border: 1.5px solid white;
+    background-color: #b60a0a;
+    text-align: center;
+    display: inline-block;
+    margin: 6px 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-to-table {
+    border-radius: 50%;
+    font-size: 13px;
+    height: 35px;
+    width: 50px;
+    color: white;
+    border: 1.5px solid white;
+    background-color: #b60a0a;
+    text-align: center;
+    display: inline-block;
+    margin: 6px 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#gift-table {
+    width: 80%;
+    border: none;
+    background-color: none;
+}
+
+th {
+    text-align: left;
+}
+
+.recipe-pic {
+    height: 20px;
+  }
+  
+  .recipe-pic:hover {
+    width: 250px;
+    height: auto;
+  }
