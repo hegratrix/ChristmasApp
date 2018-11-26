@@ -47,13 +47,12 @@
                 <div class='list-div medium-3 cell'>
                     <h1 class="list-title">Lists</h1><hr class='hr'>
                     <div id='add-groceries-list'>
-                        <p>where list titles go: div id='add-groceries-list'</p>
                     </div>
                     <button class='add-to-list' onclick='addToGroceryList()'>New List</button>
-                    <p>onclick='addToGroceryList()</p>
                 </div>
                 <div class='main-content-div medium-7 cell'>
-                    <ul class="menu-lines menu menu-hover-lines">
+                        <div class="header-tabs">
+                        <ul class="menu-lines menu menu-hover-lines">
                         <li><a href="./index.html">Home</a></li>
                         <li><a href="./gifts.html">Gifts</a></li>
                         <li><a href="./wishes.html">Wishes</a></li>
@@ -62,7 +61,8 @@
                         <li class="active"><a href="./groceries.html">Groceries</a></li>
                         <li><a href="./calendar.html">Calendar</a></li>
                     </ul>
-                    <h1 class="list-title">Grocery List</h1>
+                    </div>
+                    <h1 class="list-title">Click on a List to Start</h1>
                     <div id="show-grocery-details">
                             <table id="grocery-table">
                                 <tr>
@@ -70,24 +70,19 @@
                                     <th>Quantity</th>
                                     <th>Item</th>
                                 </tr>
+                                <tbody class="grocery-table-body"></tbody>
                                 <tr>
                                     <td><input type="checkbox" name="bought" value="false"><br></td>
-                                    <td>2lbs</td>
-                                    <td>Hamburger</td>
+                                    <td><input id="groceryQuantity" type="text" placeholder="Quantity"></td>
+                                    <td><input id="groceryItem" type="text" placeholder="Item"></td>
                                     <td><button id="edit-grocery-list" class="add-to-table" onclick="editGrocery()">Edit</button></td>
                                     <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGrocery()">Delete</button></td>
                                 </tr>
-                            </table>                        
-                            <p>edit button onclick=editGrocery(), delete button onclick=deleteGrocery()</p>
-                            <p>where bought=false goes table id="grocery-table"</p>
-                            <div class='grid-x'>
-                                <div class='medium-3 cell'></div>
-                                <div class='medium-1 cell'><input id="groceryQuantity" type="text" placeholder="Quantity"></div>
-                                <div class='medium-3 cell'><input id="groceryItem" type="text" placeholder="Item"></div>
-                                <div class='medium-2 cell'><button class="add-to-table" onclick="addGrocery()">Add</button></div>
-                                <div class='medium-3 cell'></div>
-                            </div> 
-                            <p>onclick="addGrocery()</p>
+                            </table>         
+                                   
+                    <button id="show-grocery" class="show-completed" onclick="showCompleted()">Show Completed</button>
+                    <button id="hide-grocery" class="show-completed" onclick="hideCompleted()">Hide Completed</button>
+                    
                         </div>
                         <div id="show-grocery-done">
                             <table id="grocery-table-done">
@@ -95,6 +90,7 @@
                                     <th>Quantity</th>
                                     <th>Item</th>
                                 </tr>
+                                <tbody class="done-grocery-table-body"></tbody>
                                 <tr>
                                     <td>2 cans</td>
                                     <td>Beans</td>
@@ -102,7 +98,6 @@
                                     <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGrocery()">Delete</button></td>
                                 </tr>
                             </table> 
-                            <p>where bought=true goes table id="grocery-table-done"</p>
                         </div>
                     </div>
                 <div class='decor-div medium-1 cell'>
@@ -113,10 +108,14 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/grocery.js"></script>
     <script src="./js/vendor/foundation.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="./js/vendor/what-input.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-    <script>window.onload = showDate()</script>
+    <script>
+        window.onload = showDate()
+        window.onload = displayLists()
+    </script>
 </body>
 </html>

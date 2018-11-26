@@ -3,13 +3,15 @@ module.exports = function (sequelize, DataTypes) {
      // defines grocery list values within table
      
      var groceryList = sequelize.define("groceryList", {
+          whichList: DataTypes.STRING,
           groceryName: DataTypes.STRING,
-          groceryQuantity: DataTypes.STRING,
-          isBought: DataTypes.BOOLEAN,
-     }, {
+          groceryAmount: DataTypes.STRING,
+          complete: DataTypes.BOOLEAN,
+          }, 
+          {
                freezeTableName: true,
                tableName: 'groceryList'
-          });
-
+          }
+     );
      return groceryList;
 };
