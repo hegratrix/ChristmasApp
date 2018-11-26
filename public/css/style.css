@@ -9,6 +9,7 @@
 
 .list-div {
     background-color: #7abd20;
+    overflow-y: scroll;
 }
 
 .bottom-div {
@@ -18,7 +19,7 @@
 .countdown {
     text-align: center;
     font-family: 'Mountains of Christmas', cursive;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
     padding: 5px;
   }
@@ -27,17 +28,23 @@
     background-image: url('../images/6.jpg')
 }
 
+.menu-lines {
+    font-size: 11px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .logoElf {
     position: absolute;
-    height: 125px;
+    height: 105px;
     z-index: 1;
     margin-top: -40px;
 }
 
 .app-title {
-    font-size: 40px;
-    padding-top: 10px;
-    padding-bottom: 35px;
+    font-size: 33px;
+    padding-top: 5px;
+    padding-bottom: 25px;
     color: white;
     font-family: 'Aref Ruqaa', serif;
   }
@@ -47,11 +54,12 @@
     flex-direction: column;
     align-items: center;
     margin: 9px;
+    padding-top: 9px;
 }
 
 .log-in-button {
-    padding: 13px;
-    font-size: 20px;
+    padding: 8px;
+    font-size: 12px;
     color: white;
     border: 1px solid white;
 }
@@ -62,39 +70,43 @@
 }
 
 .sign-up {
+    font-size: 10px;
     color: white;
+    padding-top: 4px;
+}
+
+.sign-up:hover {
+    font-size: 14px;
 }
 
 .list-title {
     text-align: center;
     font-family: 'Aref Ruqaa', serif;
-}
-
-.hr { 
-    border-bottom: 1px solid #375c00;
+    font-size: 32px;
 }
 
 .add-to-list {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 50%;
-    height: 50px;
-    width: 80px;
+    height: 35px;
+    width: 60px;
+    font-size: 11px;
     color: white;
-    font-weight: bold;
     border: 1.5px solid white;
     background-color: #b60a0a;
     text-align: center;
-    display: inline-block;
-    margin: 6px 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .add-to-table {
     border-radius: 50%;
-    font-size: 13px;
-    height: 35px;
-    width: 50px;
+    font-size: 10px;
+    height: 20px;
+    width: 40px;
     color: white;
-    border: 1.5px solid white;
+    border: 1.5px solid #b60a0a;
     background-color: #b60a0a;
     text-align: center;
     display: inline-block;
@@ -102,21 +114,73 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#gift-table {
-    width: 80%;
-    border: none;
-    background-color: none;
+table {
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 14px;
+    /* border: 2px solid #b60a0a; */
 }
 
 th {
     text-align: left;
+    /* border-bottom: 1px solid #b60a0a; */
 }
 
 .recipe-pic {
     height: 20px;
   }
   
-  .recipe-pic:hover {
+.recipe-pic:hover {
     width: 250px;
     height: auto;
-  }
+}
+
+.strip-border {
+    background-color: white;
+    height: 8px;
+    margin-bottom: 11px;
+}
+
+.added-to-list {
+    font-family: 'Aref Ruqaa', serif;
+    padding-left: 32px;
+    font-size: 25px;
+    line-height: 1.25;
+}
+
+.header-tabs {
+    display: flex;
+}
+
+.input-add-to-list {
+    width: 65%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    height: 25px;
+}
+
+.input-add-item {
+    font-size: 12px;
+    height: 25px;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: #b60a0a;
+}
+
+.main-content-div {
+    overflow-y: scroll;
+}
+
+td {
+    padding: 0;
+}

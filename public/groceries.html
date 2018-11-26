@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/png" href="./images/drake.jpg">
-    <link rel="stylesheet" href="./css/app.css">
-    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/foundation.min.css">
     <link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Mountains+of+Christmas" rel="stylesheet">
-    <title>Wishes</title>
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Groceries</title>
 </head>
 <body>
     <div class='grid-y grid-frame'>
@@ -46,74 +46,63 @@
                 </div>
                 <div class='list-div medium-3 cell'>
                     <h1 class="list-title">Lists</h1><hr class='hr'>
-                    <div id='add-wish-list'>
-                        <p>where list titles go: div id='add-wish-list'</p>
+                    <div id='add-groceries-list'>
+                        <p>where list titles go: div id='add-groceries-list'</p>
                     </div>
-                    <button class='add-to-list' onclick='addToWishList()'>New List</button>
-                    <p>onclick='addToWishList()</p>
+                    <button class='add-to-list' onclick='addToGroceryList()'>New List</button>
+                    <p>onclick='addToGroceryList()</p>
                 </div>
                 <div class='main-content-div medium-7 cell'>
                     <ul class="menu-lines menu menu-hover-lines">
                         <li><a href="./index.html">Home</a></li>
                         <li><a href="./gifts.html">Gifts</a></li>
-                        <li class="active"><a href="./wishes.html">Wishes</a></li>
+                        <li><a href="./wishes.html">Wishes</a></li>
                         <li><a href="./cards.html">Cards</a></li>
                         <li><a href="./recipes.html">Recipes</a></li>
-                        <li><a href="./groceries.html">Groceries</a></li>
+                        <li class="active"><a href="./groceries.html">Groceries</a></li>
                         <li><a href="./calendar.html">Calendar</a></li>
                     </ul>
-                    <h1 class="list-title">Wish List</h1>
-                    <div id="show-wish-details">
-                            <table id="wish-table">
+                    <h1 class="list-title">Grocery List</h1>
+                    <div id="show-grocery-details">
+                            <table id="grocery-table">
                                 <tr>
                                     <th>Bought</th>
+                                    <th>Quantity</th>
                                     <th>Item</th>
-                                    <th>Store/Website</th>
-                                    <th>Cost</th>
-                                    <th>Options</th>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" name="bought" value="false"><br></td>
-                                    <td>Fortnight Pjs</td>
-                                    <td>Amazon.com</td>
-                                    <td>$19.99</td>
-                                    <td>size: XL</td>
-                                    <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
-                                    <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+                                    <td>2lbs</td>
+                                    <td>Hamburger</td>
+                                    <td><button id="edit-grocery-list" class="add-to-table" onclick="editGrocery()">Edit</button></td>
+                                    <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGrocery()">Delete</button></td>
                                 </tr>
                             </table>                        
-                            <p>edit button onclick=editWishItem(), delete button onclick=deleteWishItem()</p>
-                            <p>where bought=false goes table id="wish-table"</p>
+                            <p>edit button onclick=editGrocery(), delete button onclick=deleteGrocery()</p>
+                            <p>where bought=false goes table id="grocery-table"</p>
                             <div class='grid-x'>
-                                <div class='medium-1 cell'></div>
-                                <div class='medium-2 cell'><input id="wishItem" type="text" placeholder="Item"></div>
-                                <div class='medium-2 cell'><input id="wishStore" type="text" placeholder="Store/Website"></div>
-                                <div class='medium-2 cell'><input id="wishCost" type="text" placeholder="Cost"></div>
-                                <div class='medium-2 cell'><input id="wishOptions" type="text" placeholder="Options"></div>
-                                <div class='medium-2 cell'><button class="add-to-table" onclick="addWishItem()">Add</button></div>
-                                <div class='medium-1 cell'></div>
+                                <div class='medium-3 cell'></div>
+                                <div class='medium-1 cell'><input id="groceryQuantity" type="text" placeholder="Quantity"></div>
+                                <div class='medium-3 cell'><input id="groceryItem" type="text" placeholder="Item"></div>
+                                <div class='medium-2 cell'><button class="add-to-table" onclick="addGrocery()">Add</button></div>
+                                <div class='medium-3 cell'></div>
                             </div> 
-                            <p>onclick="addWishItem()</p>
+                            <p>onclick="addGrocery()</p>
                         </div>
-                        <div id="show-wish-done">
-                            <table id="wish-table-done">
+                        <div id="show-grocery-done">
+                            <table id="grocery-table-done">
                                 <tr>
-                                    th>Bought</th>
+                                    <th>Quantity</th>
                                     <th>Item</th>
-                                    <th>Store/Website</th>
-                                    <th>Cost</th>
-                                    <th>Options</th>
                                 </tr>
                                 <tr>
-                                    <td>Headphones</td>
-                                    <td>Target</td>
-                                    <td>$35.99</td>
-                                    <td>Blue</td>
-                                    <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
-                                    <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+                                    <td>2 cans</td>
+                                    <td>Beans</td>
+                                    <td><button id="edit-grocery-list" class="add-to-table" onclick="editGrocery()">Edit</button></td>
+                                    <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGrocery()">Delete</button></td>
                                 </tr>
                             </table> 
-                            <p>where bought=true goes table id="wish-table-done"</p>
+                            <p>where bought=true goes table id="grocery-table-done"</p>
                         </div>
                     </div>
                 <div class='decor-div medium-1 cell'>
