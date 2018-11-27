@@ -41,6 +41,13 @@ module.exports = function (app) {
                res.json(dbRecipe);
           });
 });
+
+    // PUT route for updating gifts
+    app.put("/recipeList/:id", function (req, res) {          
+     db.recipeList.update(req.body, { where: { id: req.params.id }})
+     .then(() => res.sendStatus(200))
+        .catch(e => console.log(e)) 
+ });
 }
 
 

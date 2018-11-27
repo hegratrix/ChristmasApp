@@ -26,18 +26,12 @@ function addGroceryItem() {
         groceryName: newGroceryItemInput,                          
         complete: false
    };
-   $.post("/groceryList", grocery);  
-   $('#grocery-table tr:last').before(`
-      <tr>
-         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
-         <td>${newGroceryItemInput}</td>
-         <td>${newGroceryQuantityInput}</td>
-         <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
-         <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
-      </tr>
-   `)
+   $.post("/groceryList", grocery)  
+   .then(r => {
    $("#groceryQuantity").val('')
    $("#groceryItem").val('')
+   showList(addingToList)
+})
 }
 
 function showList(Name) {
@@ -50,7 +44,7 @@ function showList(Name) {
             if (data[i].whichList === Name && data[i].complete === false) {
                 $('.grocery-table-body').append(`
                     <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td>${data[i].groceryName}</td>
                         <td>${data[i].groceryAmount}</td>
                         <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem(${data[i].id})">Edit</button></td>
@@ -59,9 +53,11 @@ function showList(Name) {
              `)
             } else {
                 if (data[i].whichList === Name) {
+                    console.log(data[i].groceryName)
+                    console.log(data[i].groceryAmount)
                     $('.done-grocery-table-body').append(`
                     <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td>${data[i].groceryName}</td>
                         <td>${data[i].groceryAmount}</td>
                         <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem(${data[i].id})">Edit</button></td>
@@ -105,7 +101,41 @@ function deleteGroceryItem(id) {
     })
 }
 
-
+function changeStatus(idStatus) {
+    let isComplete 
+    $.get("/groceryList", function (data) {
+        for (i=0; i<data.length; i++) {
+            console.log(idStatus)
+            console.log(data[i].id)
+            if (data[i].id === idStatus) {
+                console.log('match')
+                isComplete = data[i].complete
+            }
+        }
+    })
+    .then(r => {
+        console.log(isComplete)
+        if (isComplete === true) {
+            console.log('true')
+            fetch(`/groceryList/${idStatus}`, {
+                method: "PUT",
+                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+                body: JSON.stringify({ complete: false })
+            }).then(r=> {
+           showList(addingToList)
+            })
+        } else {
+            console.log('false')
+            fetch(`/groceryList/${idStatus}`, {
+                method: "PUT",
+                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+                body: JSON.stringify({ complete: true })
+            }).then(r=> {
+           showList(addingToList)
+            })
+        }
+   })
+}
 
 
 

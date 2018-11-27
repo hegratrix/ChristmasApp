@@ -42,6 +42,13 @@ module.exports = function (app) {
                     res.json(dbCard);
                });
      });
+
+     app.put("/cardsList/:id", function (req, res) {
+          db.cardsList.update(req.body, { where: { id: req.params.id }})
+          .then(function (dbCard) {
+              res.json(dbCard);
+          });
+      });
 }
 
 

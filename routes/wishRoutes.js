@@ -40,6 +40,14 @@ app.delete("/wishList/:id", function (req, res) {
               res.json(dbWish);
          });               
 });
+
+    // PUT route for updating gifts
+    app.put("/wishList/:id", function (req, res) {          
+        db.wishList.update(req.body, { where: { id: req.params.id }})
+        .then(function (dbWish) {
+            res.json(dbWish);
+       });  
+    })
 }
 
 

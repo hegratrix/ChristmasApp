@@ -32,24 +32,19 @@ function addCardItem() {
       cardZipCode: newCardZipCodeInput,
       complete: false
    };
-   $.post("/cardsList", card);
-   $('#card-table tr:last').after(`
-      <tr>
-         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
-         <td>${newCardNameInput}</td>
-         <td><button id="show-card-list" class="add-to-table" onclick="showCard()">Show</button></td>
-         <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
-         <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
-      </tr>
-   `)
+   $.post("/cardsList", card)
+   .then(r => {
    $('#cardName').val('')
    $('#cardAddress').val('')
    $('#cardCity').val('')
    $('#cardState').val('')
    $('#cardZipCode').val('')
+    showList(addingToList)
+   })
  }
 
  function showList(Name) {
+     console.log('ping')
    addingToList = Name
    $('#card-list-title').html(`${Name} Card List`)
    $('.card-table-body').empty()
@@ -59,7 +54,7 @@ function addCardItem() {
            if (data[i].whichList === Name && data[i].complete === false) {
                $('.card-table-body').append(`
                   <tr>
-                     <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
+                     <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                      <td>${data[i].cardName}</td>
                      <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
                      <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
@@ -70,7 +65,7 @@ function addCardItem() {
                if (data[i].whichList === Name) {
                    $('.done-card-table-body').append(`
                      <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td>${data[i].cardName}</td>
                         <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
                         <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
@@ -116,7 +111,41 @@ function deleteCard(id) {
    })
 }
 
-
+function changeStatus(idStatus) {
+   event.preventDefault()
+   let isComplete 
+   $.get("/cardsList", function (data) {
+       for (i=0; i<data.length; i++) {
+           if (data[i].id === idStatus) {
+               console.log('match')
+               isComplete = data[i].complete
+           }
+       }
+   })
+   .then(r => {
+      console.log(isComplete)
+       if (isComplete === true) {
+          console.log('true')
+           fetch(`/cardsList/${idStatus}`, {
+               method: "PUT",
+               headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+               body: JSON.stringify({ complete: false })
+           }).then(r=> {
+          showList(addingToList)
+           })
+       } else {
+          console.log('false')
+          console.log(idStatus)
+           fetch(`/cardsList/${idStatus}`, {
+               method: "PUT",
+               headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+               body: JSON.stringify({ complete: true })
+           }).then(r=> {
+          showList(addingToList)
+           })
+       }
+  })
+}
 
 
          //       // variable to link input fields for adding new list item

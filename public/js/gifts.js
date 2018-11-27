@@ -8,10 +8,10 @@ function displayLists() {
                 giftLists.push(data[i].whichList)
             }
         }
-    giftLists.forEach(function(item) {
-        $('#add-gift-list').append (`
-            <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
-        `)
+        giftLists.forEach(function(item) {
+            $('#add-gift-list').append (`
+                <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+            `)
         });
     });
 }
@@ -25,19 +25,13 @@ function addGiftItem() {
         giftName: newGiftNameInput,
         giftBudget: newGiftBudgetInput,                          
         complete: false
-   };
-   $.post("/giftsList", gift);  
-   $('#gift-table tr:last').before(`
-      <tr>
-         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
-         <td>${newGiftNameInput}</td>
-         <td>$${newGiftBudgetInput}</td>
-         <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-         <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
-      </tr>
-   `)
-   $("#giftName").val('')
-   $("#giftBudget").val('')
+    };
+    $.post("/giftsList", gift)
+    .then(r => {
+        $("#giftName").val('')
+        $("#giftBudget").val('')
+        showList(addingToList)
+    })
 }
 
 function showList(Name) {
@@ -50,32 +44,32 @@ function showList(Name) {
             if (data[i].whichList === Name && data[i].complete === false) {
                 $('.gift-table-body').append(`
                     <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td>${data[i].giftName}</td>
                         <td>$${data[i].giftBudget}</td>
                         <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem(${data[i].id})">Edit</button></td>
                         <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem(${data[i].id})">Delete</button></td>
                     </tr>
-             `)
+                `)
             } else {
                 if (data[i].whichList === Name) {
                     $('.done-gift-table-body').append(`
-                    <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
-                        <td>${data[i].giftName}</td>
-                        <td>${data[i].giftBought}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem(${data[i].id})">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem(${data[i].id})">Delete</button></td>
-                    </tr>
-             `)
+                        <tr>
+                            <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
+                            <td>${data[i].giftName}</td>
+                            <td>${data[i].giftBought}</td>
+                            <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem(${data[i].id})">Edit</button></td>
+                            <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem(${data[i].id})">Delete</button></td>
+                        </tr>
+                    `)
                 }
             }
         }
     })
     $('#show-gift-details').css('display', 'block')
- }
+}
 
- function addToGiftList() {
+function addToGiftList() {
     event.preventDefault()
     let listName = $('#add-to-gift-list').val()
     $('#add-gift-list').append (`
@@ -101,22 +95,62 @@ function deleteGiftItem(id) {
     fetch(`/giftsList/${id}`, {
         method: 'DELETE'
     }).then(r=> {
-        showList()
+        showList(addingToList)
+    })
+}
+
+function changeStatus(idStatus) {
+    let isComplete 
+    $.get("/giftsList", function (data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].id === idStatus) {
+                isComplete = data[i].complete
+            }
+        }
+    })
+    .then(r => {
+        if (isComplete === true) {
+            fetch(`/giftsList/${idStatus}`, {
+                method: "PUT",
+                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+                body: JSON.stringify({ complete: false })
+            }).then(r=> {
+            showList(addingToList)
+            })
+        } else {
+            fetch(`/giftsList/${idStatus}`, {
+                method: "PUT",
+                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+                body: JSON.stringify({ complete: true })
+            }).then(r=> {
+                openModal(idStatus)
+            })
+        }
+   })
+}
+
+function openModal(id) {
+    $('.modal').css('display', 'block')
+    $('#id-number').val(id)
+}
+
+function addGiftToTable() {
+    let gift = $('#gift-title').val()
+    let id = $('#id-number').val()
+    fetch(`/giftsList/${id}`, {
+        method: "PUT",
+        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        body: JSON.stringify({ giftBought: gift })
+    }).then(r=> {
+        $('#gift-title').val('')
+        $('#id-number').val('')
+        $('.modal').css('display', 'none')
+        showList(addingToList)
     })
 }
 
 
 
-
-// // deletes a todo from the list when the user clicks the delete button
-// function deleteGiftItem(event) {
-//     event.stopPropagation();
-//     var id = $(this).data("id");
-//     $.ajax({
-//          method: "DELETE",
-//          url: "/giftsList/" + id
-//     }).then();
-// // 
 
 
 
@@ -148,11 +182,3 @@ function deleteGiftItem(id) {
 //      updateTodo(todo);
 // }
 
-// // updates a todo list item in the database
-// function updateTodo(todo) {
-//      $.ajax({
-//           method: "PUT",
-//           url: "/giftsList",
-//           data: todo
-//      }).then(getTodos);
-// }

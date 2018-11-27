@@ -30,22 +30,14 @@ function addWishItem() {
       itemOptions: newItemOptionsInput,
       complete: false
   }
-  $.post("/wishList", wish);
-  $('#wish-table tr:last').before(`
-     <tr>
-        <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
-        <td>${newItemNameInput}</td>
-        <td>${newItemLocationInput}</td>
-        <td>$${newItemPriceInput}</td>
-        <td>${newItemOptionsInput}</td>
-        <td><button id="edit-wish-list" class="add-to-table" onclick="editWishNewItem(${newItemNameInput})">Edit</button></td>
-        <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishNewItem(${newItemNameInput})">Delete</button></td>
-     </tr>
-  `)
+  $.post("/wishList", wish)
+  .then(r => {
   $('#wishItem').val('')
   $('#wishStore').val('')
   $('#wishCost').val('')
   $('#wishOptions').val('')
+  showList(addingToList)
+  })
 }
 
 function showList(Name) {
@@ -58,7 +50,7 @@ function showList(Name) {
          if (data[i].whichList === Name && data[i].complete === false) {
             $('.wish-table-body').append(`
                <tr>
-                  <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
+                  <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                   <td>${data[i].itemName}</td>
                   <td>${data[i].itemLocation}</td>
                   <td>$${data[i].itemPrice}</td>
@@ -71,7 +63,7 @@ function showList(Name) {
             if (data[i].whichList === Name) {
                   $('.done-wish-table-body').append(`
                      <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td>${data[i].itemName}</td>
                         <td>${data[i].itemLocation}</td>
                         <td>$${data[i].itemPrice}</td>
@@ -116,6 +108,43 @@ function deleteWishItem(id) {
        showList(addingToList)
    })
 }
+
+function changeStatus(idStatus) {
+   event.preventDefault()
+   let isComplete 
+   $.get("/wishList", function (data) {
+       for (i=0; i<data.length; i++) {
+           if (data[i].id === idStatus) {
+               console.log('match')
+               isComplete = data[i].complete
+           }
+       }
+   })
+   .then(r => {
+      console.log(isComplete)
+       if (isComplete === true) {
+          console.log('true')
+           fetch(`/wishList/${idStatus}`, {
+               method: "PUT",
+               headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+               body: JSON.stringify({ complete: false })
+           }).then(r=> {
+          showList(addingToList)
+           })
+       } else {
+          console.log('false')
+          console.log(idStatus)
+           fetch(`/wishList/${idStatus}`, {
+               method: "PUT",
+               headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+               body: JSON.stringify({ complete: true })
+           }).then(r=> {
+          showList(addingToList)
+           })
+       }
+  })
+}
+
 
 // function deleteWishNewItem(name) {
 //    event.stopPropagation();

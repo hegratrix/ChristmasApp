@@ -30,21 +30,14 @@ function addRecipeItem() {
         recipeMakes: newRecipeMakesInput,         
         complete: false
    };
-   $.post("/recipeList", recipe);  
-   $('#recipe-table tr:last').before(`
-      <tr>
-         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
-         <td><img class="recipe-pic" src="${newRecipeImageInput}"></td>
-         <td>${newRecipeNameInput}</td>
-        <td><a href="${newRecipeLinkInput}">Recipe</a></td>
-         <td>${newRecipeMakesInput}</td>
-         <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
-         <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
-   `)
+   $.post("/recipeList", recipe) 
+   .then(r => {
    $("#recipeImage").val('');
     $("#recipeType").val('');
     $("#recipeLink").val('');
     $("#recipeMakes").val('');
+    showList(addingToList)
+})
 }
 
 function showList(Name) {
@@ -57,7 +50,7 @@ function showList(Name) {
             if (data[i].whichList === Name && data[i].complete === false) {
                 $('.recipe-table-body').append(`
                     <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td><img class="recipe-pic" src="${data[i].recipeImage}"></td>
                         <td>${data[i].recipeName}</td>
                         <td><a href="${data[i].recipeLink}">Recipe</a></td>
@@ -70,7 +63,7 @@ function showList(Name) {
                 if (data[i].whichList === Name) {
                     $('.done-recipe-table-body').append(`
                     <tr>
-                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td><img class="recipe-pic" src="${data[i].recipeImage}"></td>
                         <td>${data[i].recipeName}</td>
                         <td><a href="${data[i].recipeLink}">Recipe</a></td>
@@ -114,6 +107,36 @@ function deleteRecipeItem(id) {
     }).then(r=> {
         showList(addingToList)
     })
+}
+
+function changeStatus(idStatus) {
+    let isComplete 
+    $.get("/recipeList", function (data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].id === idStatus) {
+                isComplete = data[i].complete
+            }
+        }
+    })
+    .then(r => {
+        if (isComplete === true) {
+            fetch(`/recipeList/${idStatus}`, {
+                method: "PUT",
+                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+                body: JSON.stringify({ complete: false })
+            }).then(r=> {
+            showList(addingToList)
+            })
+        } else {
+            fetch(`/recipeList/${idStatus}`, {
+                method: "PUT",
+                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+                body: JSON.stringify({ complete: true })
+            }).then(r=> {
+                showList(addingToList)
+            })
+        }
+   })
 }
 
 

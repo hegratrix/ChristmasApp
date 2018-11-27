@@ -246,3 +246,52 @@ th {
 #hide-gift, #hide-wish, #hide-card, #hide-recipe, #hide-grocery {
     display: none;
 }
+
+.modal {
+    background: #b60a0a;
+    background-image: url("../images/gift.png");
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    font-family: 'Mountains of Christmas', cursive;
+    text-align: center;
+    border: 2px solid darkgreen;
+    width: 30%;
+    left: 47%;
+    padding: 15px;
+    z-index: 1;
+    top: 30%;
+    position: absolute;
+    height: 260px;
+    display: none;
+  }
+
+  #gift-question {
+      font-size: 20px;
+      color: white;
+  }
+
+  input::placeholder {
+      color: darkgray;
+  }
+
+  #modal-yay {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 25px;
+    width: 66px;
+    font-size: 15px;
+    color: white;
+    background-color: #375c00;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+#gift-title {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+#id-number {
+    display: none;
+}

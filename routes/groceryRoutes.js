@@ -39,6 +39,14 @@ app.delete("/groceryList/:id", function (req, res) {
                res.json(dbGroceries);
           });
  });
+
+     // PUT route for updating gifts
+     app.put("/groceryList/:id", function (req, res) {          
+          db.groceryList.update(req.body, { where: { id: req.params.id }})
+          .then(function (dbGroceries) {
+              res.json(dbGroceries);
+          });
+      });
 }
 
 

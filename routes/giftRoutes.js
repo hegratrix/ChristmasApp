@@ -40,20 +40,11 @@ module.exports = function (app) {
             res.json(dbGift);
         });
     });
-}
-
-
-
 
     // PUT route for updating gifts
-    // app.put("/giftsList", function (req, res) {          
-    //     db.giftsList.update({
-    //         giftName: req.body.giftName,
-    //         giftBudget: req.body.giftBudget,
-    //         complete: req.body.complete
-    //     }, { where: { id: req.body.id }
-    //     }).then(function (dbGift) {
-    //         res.json(dbGift);
-    //     });
-    // });
-  
+    app.put("/giftsList/:id", function (req, res) {          
+        db.giftsList.update(req.body, { where: { id: req.params.id }})
+        .then(() => res.sendStatus(200))
+        .catch(e => console.log(e))
+    });
+}  
