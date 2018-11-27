@@ -325,7 +325,7 @@ th {
     padding: 10px;
 }
 
-.modal2, .modal3, .modal4, .modal5, .modal6 {
+.modal2, .modal3, .modal4, .modal5, .modal6, .modal8, .modal9 {
     background: #b60a0a;
     font-family: 'Mountains of Christmas', cursive;
     text-align: center;
@@ -334,7 +334,7 @@ th {
     left: 47%;
     padding: 15px;
     z-index: 1;
-    top: 30%;
+    top: 20%;
     position: absolute;
     height: auto;
     display: none;
@@ -372,4 +372,27 @@ th {
   #info {
       font-size: 10px;
       text-align: center;
+  }
+
+  .row {
+    margin-right: auto;
+    margin-left: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .event-btn {
+    height: 25px;
+    width: 36px;
+    font-size: 10px;
+    padding: 2px;
+    color: white;
+    background-color: #375c00;
+    border: 1px solid #375c00;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .column {
+      display: block;
   }
