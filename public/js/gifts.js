@@ -189,7 +189,7 @@ function updateItem () {
         $('#gift-name').val('')
         $('#gift-budget').val('')
         $('#gift-bought').val('')
-        showList(addingToList)
+        location.reload()
     })
 }
 

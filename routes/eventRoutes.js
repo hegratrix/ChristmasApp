@@ -42,6 +42,13 @@ app.delete("/eventList/:id", function (req, res) {
                res.json(dbEvent);
           });
  });
+
+     // PUT route for updating gifts
+     app.put("/eventList/:id", function (req, res) {          
+          db.eventList.update(req.body, { where: { id: req.params.id }})
+          .then(() => res.sendStatus(200))
+          .catch(e => console.log(e))
+      });
 }
 
 

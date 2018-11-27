@@ -23,9 +23,9 @@ function addEventToList() {
         $("#event-time").val('')
         $("#event-location").val('')
         $("#event-instructions").val('')
+            showEvents()
     })
     $('.modal8').css('display', 'none')
-    showEvents()
 }
 
 function showEvents() {
@@ -49,10 +49,8 @@ function showEvents() {
                                     <p class="flip-card-inner-back-text">Time: ${time}</p>
                                     <p class="flip-card-inner-back-text">Location: ${data[i].eventLocation}</p>
                                     <p class="flip-card-inner-back-text">Instructions: ${data[i].eventInstructions}</p>
-                                    <div class="event-buttons">
-                                        <button class="event-btn button" onclick="editEvent(${data[i].id})">Edit</button>
-                                        <button class="event-btn button" onclick="deleteEvent(${data[i].id})">Delete</button>
-                                    </div>
+                                        <div><button id="edit-event" class="event-btn button" onclick="editEvent(${data[i].id})">Edit</button></div>
+                                        <div><button id="delete-event" class="event-btn button" onclick="deleteEvent(${data[i].id})">Delete</button></div>
                                 </div>
                             </div>
                         </div>
@@ -68,11 +66,11 @@ function editEvent(id) {
         for (i=0; i<data.length; i++) {
             if (data[i].id === id) {
                 $('#modal9-id').val(id)
-                $("#event-name").val(data[i].whichList) 
-                $("#event-date").val(data[i].whichList)                
-                $("#event-time").val(data[i].eventName)               
-                $("#event-location").val(data[i].eventBudget)
-                $("#event-instructions").val(data[i].eventBought)
+                $("#event-name2").val(data[i].eventName) 
+                $("#event-date2").val(data[i].eventDate)                
+                $("#event-time2").val(data[i].eventTime)               
+                $("#event-location2").val(data[i].eventLocation)
+                $("#event-instructions2").val(data[i].eventInstructions)
             }
         }
     }).then(r => {
@@ -89,5 +87,24 @@ function deleteEvent(id) {
 }
 
 function updateItem() {
-
+    let id = $("#modal9-id").val()
+    let event = $("#event-name2").val()
+    let date = $("#event-date2").val()
+    let time = $("#event-time2").val()
+    let location = $("#event-location2").val()
+    let instructions = $("#event-instructions2").val()
+    fetch(`/eventList/${id}`, {
+        method: "PUT",
+        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        body: JSON.stringify({ eventName: event, eventDate: date, eventTime: time, eventLocation: location, eventInstructions: instructions})
+}).then(r=> {
+    $('.modal9').css('display', 'none')
+        $("#modal2-id").val('')
+        $('#event-name2').val('')
+        $('#event-date2').val('')
+        $('#event-time2').val('')
+        $('#event-location2').val('')
+        $('#event-instructions2').val('')
+        showEvents()
+    })
 }
