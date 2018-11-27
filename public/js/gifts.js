@@ -32,8 +32,8 @@ function addGiftItem() {
          <td><input type="checkbox" name="bought" value="false"><br></td>
          <td>${newGiftNameInput}</td>
          <td>$${newGiftBudgetInput}</td>
-         <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-         <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+         <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem(${data[i].id})">Edit</button></td>
+         <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem(${data[i].id})">Delete</button></td>
       </tr>
    `)
    $("#giftName").val('')
@@ -47,14 +47,15 @@ function showList(Name) {
     $('.done-gift-table-body').empty()
     $.get("/giftsList", function (data) {
         for (let i=0; i<data.length; i++) {
+            console.log(data[i].id)
             if (data[i].whichList === Name && data[i].complete === false) {
                 $('.gift-table-body').append(`
                     <tr>
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
                         <td>${data[i].giftName}</td>
                         <td>$${data[i].giftBudget}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem(${data[i].id})">Delete</button></td>
                     </tr>
              `)
             } else {
@@ -64,8 +65,8 @@ function showList(Name) {
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
                         <td>${data[i].giftName}</td>
                         <td>${data[i].giftBought}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem(${data[i].id})">Delete</button></td>
                     </tr>
              `)
                 }
@@ -95,6 +96,18 @@ function hideCompleted() {
     $('#show-gift').css('display', 'block')
     $('#hide-gift').css('display', 'none')
 }
+
+function deleteGiftItem(id) {
+    event.stopPropagation();
+    fetch(`/giftsList/${id}`, {
+        method: 'DELETE'
+    }).then(r=> {
+        showList()
+    })
+}
+
+
+
 
 // // deletes a todo from the list when the user clicks the delete button
 // function deleteGiftItem(event) {

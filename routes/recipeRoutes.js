@@ -33,6 +33,14 @@ module.exports = function (app) {
                   res.json(dbRecipe);
                });
           });
+
+             // DELETE route for deleting recipes
+   app.delete("/recipeList/:id", function (req, res) {
+     db.recipeList.destroy({where: {id: req.params.id}})
+          .then(function (dbRecipe) {
+               res.json(dbRecipe);
+          });
+});
 }
 
 
@@ -40,13 +48,7 @@ module.exports = function (app) {
    
    
 
-//    // DELETE route for deleting recipes
-//    app.delete("/recipeList/:id", function (req, res) {
-//         db.recipeList.destroy({where: {id: req.params.id}})
-//              .then(function (dbRecipe) {
-//                   res.json(dbRecipe);
-//              });
-//    });
+
 
 //    // PUT route for updating recipes
 //    app.put("/recipeList", function (req, res) {

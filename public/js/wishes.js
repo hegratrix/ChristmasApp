@@ -38,8 +38,8 @@ function addWishItem() {
         <td>${newItemLocationInput}</td>
         <td>$${newItemPriceInput}</td>
         <td>${newItemOptionsInput}</td>
-        <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
-        <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+        <td><button id="edit-wish-list" class="add-to-table" onclick="editWishNewItem(${newItemNameInput})">Edit</button></td>
+        <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishNewItem(${newItemNameInput})">Delete</button></td>
      </tr>
   `)
   $('#wishItem').val('')
@@ -63,8 +63,8 @@ function showList(Name) {
                   <td>${data[i].itemLocation}</td>
                   <td>$${data[i].itemPrice}</td>
                   <td>${data[i].itemOptions}</td>
-                  <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
-                  <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+                  <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem(${data[i].id})">Edit</button></td>
+                  <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem(${data[i].id})">Delete</button></td>
                </tr>
             `)
          } else {
@@ -76,8 +76,8 @@ function showList(Name) {
                         <td>${data[i].itemLocation}</td>
                         <td>$${data[i].itemPrice}</td>
                         <td>${data[i].itemOptions}</td>
-                        <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
-                        <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
+                        <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem(${data[i].id})">Delete</button></td>
                      </tr>
                   `)
                }
@@ -108,8 +108,33 @@ function hideCompleted() {
    $('#hide-wish').css('display', 'none')
 }
 
+function deleteWishItem(id) {
+   event.stopPropagation();
+   fetch(`/wishList/${id}`, {
+       method: 'DELETE'
+   }).then(r=> {
+       showList(addingToList)
+   })
+}
 
-
+// function deleteWishNewItem(name) {
+//    event.stopPropagation();
+//    console.log('ping')
+//    let id
+//    $.get("/wishList", function (data) {
+//       for (let i=0; i<data.length; i++) {
+//          if (data[i].itemName === name) {
+//             id = data[i].id
+//          }
+//       }
+//    })
+//    console.log(id)
+//    fetch(`/wishList/${id}`, {
+//        method: 'DELETE'
+//    }).then(r=> {
+//        showList(addingToList)
+//    })
+// }
 
 
 

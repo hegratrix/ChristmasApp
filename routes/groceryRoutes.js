@@ -31,6 +31,14 @@ app.post("/groceryList", function (req, res) {
               res.json(dbGroceries);
          });
 });
+
+// DELETE route for deleting groceries
+app.delete("/groceryList/:id", function (req, res) {
+     db.groceryList.destroy({where: {id: req.params.id}})
+          .then(function (dbGroceries) {
+               res.json(dbGroceries);
+          });
+ });
 }
 
 
@@ -38,13 +46,7 @@ app.post("/groceryList", function (req, res) {
 
 
 
-// // DELETE route for deleting groceries
-// app.delete("/groceryList/:id", function (req, res) {
-//     db.groceryList.destroy({where: {id: req.params.id}})
-//          .then(function (dbGroceries) {
-//               res.json(dbGroceries);
-//          });
-// });
+
 
 // // PUT route for updating groceries
 // app.put("/groceryList", function (req, res) {          

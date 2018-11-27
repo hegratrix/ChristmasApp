@@ -32,17 +32,19 @@ module.exports = function (app) {
                 res.json(dbWish);
             });
     });
+    
+    // DELETE route for deleting wishes
+app.delete("/wishList/:id", function (req, res) {
+    db.wishList.destroy({where: {id: req.params.id}})
+         .then(function (dbWish) {
+              res.json(dbWish);
+         });               
+});
 }
 
 
 
-// // DELETE route for deleting wishes
-// app.delete("/wishList/:id", function (req, res) {
-//     db.wishList.destroy({where: {id: req.params.id}})
-//          .then(function (dbWish) {
-//               res.json(dbWish);
-//          });               
-// });
+
 
 // // PUT route for updating wishes
 // app.put("/wishList", function (req, res) {

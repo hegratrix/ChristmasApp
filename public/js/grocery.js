@@ -3,7 +3,6 @@ let addingToList
 
 function displayLists() {
     $.get("/groceryList", function (data) {
-        console.log(data)
         for (let i=0; i< data.length; i++) {
             if (groceryLists.includes(data[i].whichList) === false) {
                 groceryLists.push(data[i].whichList)
@@ -23,8 +22,8 @@ function addGroceryItem() {
     let newGroceryItemInput = $("#groceryItem").val().trim()
     var grocery = {
         whichList: addingToList,
-        groceryQuantity: newGroceryQuantityInput,
-        groceryItem: newGroceryItemInput,                          
+        groceryAmount: newGroceryQuantityInput,
+        groceryName: newGroceryItemInput,                          
         complete: false
    };
    $.post("/groceryList", grocery);  
@@ -37,8 +36,8 @@ function addGroceryItem() {
          <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
       </tr>
    `)
-   $("#groceryName").val('')
-   $("#groceryBudget").val('')
+   $("#groceryQuantity").val('')
+   $("#groceryItem").val('')
 }
 
 function showList(Name) {
@@ -54,8 +53,8 @@ function showList(Name) {
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
                         <td>${data[i].groceryName}</td>
                         <td>${data[i].groceryAmount}</td>
-                        <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
-                        <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
+                        <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem(${data[i].id})">Delete</button></td>
                     </tr>
              `)
             } else {
@@ -65,8 +64,8 @@ function showList(Name) {
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
                         <td>${data[i].groceryName}</td>
                         <td>${data[i].groceryAmount}</td>
-                        <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
-                        <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
+                        <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem(${data[i].id})">Delete</button></td>
                     </tr>
              `)
                 }
@@ -97,7 +96,14 @@ function hideCompleted() {
     $('#hide-grocery').css('display', 'none')
 }
 
-
+function deleteGroceryItem(id) {
+    event.stopPropagation();
+    fetch(`/groceryList/${id}`, {
+        method: 'DELETE'
+    }).then(r=> {
+        showList(addingToList)
+    })
+}
 
 
 

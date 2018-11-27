@@ -61,9 +61,9 @@ function addCardItem() {
                   <tr>
                      <td><input type="checkbox" name="bought" value="false"><br></td>
                      <td>${data[i].cardName}</td>
-                     <td><button id="show-card-list" class="add-to-table" onclick="showCard()">Show</button></td>
-                     <td><button id="edit-card-list" class="add-to-table" onclick="editCard()">Edit</button></td>
-                     <td><button id="delete-card-list" class="add-to-table" onclick="deleteCard()">Delete</button></td>
+                     <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
+                     <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
+                     <td><button id="delete-card-list" class="add-to-table" onclick="deleteCard(${data[i].id})">Delete</button></td>
                   </tr>
             `)
            } else {
@@ -72,9 +72,9 @@ function addCardItem() {
                      <tr>
                         <td><input type="checkbox" name="bought" value="false"><br></td>
                         <td>${data[i].cardName}</td>
-                        <td><button id="show-card-list" class="add-to-table" onclick="showCard()">Show</button></td>
-                        <td><button id="edit-card-list" class="add-to-table" onclick="editCard()">Edit</button></td>
-                        <td><button id="delete-card-list" class="add-to-table" onclick="deleteCard()">Delete</button></td>
+                        <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
+                        <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-card-list" class="add-to-table" onclick="deleteCard(${data[i].id})">Delete</button></td>
                      </tr>
             `)
                }
@@ -106,7 +106,15 @@ function hideCompleted() {
    $('#hide-card').css('display', 'none')
 }
 
-
+function deleteCard(id) {
+   event.stopPropagation();
+   console.log(id)
+   fetch(`/cardsList/${id}`, {
+       method: 'DELETE'
+   }).then(r=> {
+       showList(addingToList)
+   })
+}
 
 
 

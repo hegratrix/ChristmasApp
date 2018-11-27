@@ -34,6 +34,14 @@ module.exports = function (app) {
                   res.json(dbCard);
              });
    });
+
+      // DELETE route for deleting cards
+      app.delete("/cardsList/:id", function (req, res) {
+          db.cardsList.destroy({where: {id: req.params.id}})
+               .then(function (dbCard) {
+                    res.json(dbCard);
+               });
+     });
 }
 
 
@@ -41,13 +49,7 @@ module.exports = function (app) {
 
 
 
-//    // DELETE route for deleting cards
-//    app.delete("/cardsList/:id", function (req, res) {
-//         db.cardsList.destroy({where: {id: req.params.id}})
-//              .then(function (dbCard) {
-//                   res.json(dbCard);
-//              });
-//    });
+
 
 //    // PUT route for updating cards
 

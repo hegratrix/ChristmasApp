@@ -37,13 +37,14 @@ function addRecipeItem() {
          <td><img class="recipe-pic" src="${newRecipeImageInput}"></td>
          <td>${newRecipeNameInput}</td>
         <td><a href="${newRecipeLinkInput}">Recipe</a></td>
-        <td>${newRecipeLinkInput}</td>
          <td>${newRecipeMakesInput}</td>
          <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
          <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
    `)
-   $("#recipeName").val('')
-   $("#recipeBudget").val('')
+   $("#recipeImage").val('');
+    $("#recipeType").val('');
+    $("#recipeLink").val('');
+    $("#recipeMakes").val('');
 }
 
 function showList(Name) {
@@ -61,8 +62,8 @@ function showList(Name) {
                         <td>${data[i].recipeName}</td>
                         <td><a href="${data[i].recipeLink}">Recipe</a></td>
                         <td>${data[i].recipeMakes}</td>
-                        <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
-                        <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
+                        <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem(${data[i].id})">Delete</button></td>
                     </tr>
              `)
             } else {
@@ -74,8 +75,8 @@ function showList(Name) {
                         <td>${data[i].recipeName}</td>
                         <td><a href="${data[i].recipeLink}">Recipe</a></td>
                         <td>${data[i].recipeMakes}</td>
-                        <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
-                        <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
+                        <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem(${data[i].id})">Edit</button></td>
+                        <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem(${data[i].id})">Delete</button></td>
                     </tr>
              `)
                 }
@@ -106,7 +107,14 @@ function hideCompleted() {
     $('#hide-recipe').css('display', 'none')
 }
 
-
+function deleteRecipeItem(id) {
+    event.stopPropagation();
+    fetch(`/recipeList/${id}`, {
+        method: 'DELETE'
+    }).then(r=> {
+        showList(addingToList)
+    })
+}
 
 
 

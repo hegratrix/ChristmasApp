@@ -34,12 +34,16 @@ module.exports = function (app) {
     });
 
     // DELETE route for deleting gifts
-    // app.delete("/giftsList/:id", function (req, res) {
-    //     db.giftsList.destroy({where: {id: req.params.id}})
-    //     .then(function (dbGift) {
-    //         res.json(dbGift);
-    //     });
-    // });
+    app.delete("/giftsList/:id", function (req, res) {
+        db.giftsList.destroy({where: {id: req.params.id}})
+        .then(function (dbGift) {
+            res.json(dbGift);
+        });
+    });
+}
+
+
+
 
     // PUT route for updating gifts
     // app.put("/giftsList", function (req, res) {          
@@ -53,4 +57,3 @@ module.exports = function (app) {
     //     });
     // });
   
-}
