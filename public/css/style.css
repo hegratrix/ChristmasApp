@@ -70,9 +70,8 @@
 }
 
 .sign-up {
-    font-size: 10px;
+    font-size: 12px;
     color: white;
-    padding-top: 4px;
 }
 
 .sign-up:hover {
@@ -325,7 +324,7 @@ th {
     padding: 10px;
 }
 
-.modal2, .modal3, .modal4, .modal5, .modal6, .modal8, .modal9 {
+.modal2, .modal3, .modal4, .modal5, .modal6, .modal8 {
     background: #b60a0a;
     font-family: 'Mountains of Christmas', cursive;
     text-align: center;
@@ -335,6 +334,21 @@ th {
     padding: 15px;
     z-index: 1;
     top: 20%;
+    position: absolute;
+    height: auto;
+    display: none;
+  }
+
+.modal9 {
+    background: #b60a0a;
+    font-family: 'Mountains of Christmas', cursive;
+    text-align: center;
+    border: 2px solid darkgreen;
+    width: 30%;
+    left: 47%;
+    padding: 15px;
+    z-index: 1;
+    top: 10%;
     position: absolute;
     height: auto;
     display: none;
@@ -394,5 +408,35 @@ th {
   }
 
   #edit-event {
-      margin: 10px;
+      margin: 5px;
   }
+
+#index-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}  
+
+#index-pg {
+    font-family: 'Aref Ruqaa', serif;
+    width: 100%;
+}
+
+.welcome {
+    font-family: 'Aref Ruqaa', serif;
+}
+
+.prepare {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 25px;
+    margin: 23px;
+}
+
+#index-btn1, #index-btn2, #index-btn3, #index-btn4, #index-btn5, #index-btn6  {
+    background: #375c00;
+    color: white;
+    font-size: 19px;
+    padding: 8px;
+    /* height: 20px;
+    width: 30px; */
+}
