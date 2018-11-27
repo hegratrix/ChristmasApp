@@ -2,6 +2,7 @@ let cardLists = []
 let addingToList
 
 function displayLists() {
+    cardLists = []
    $.get("/cardsList", function (data) {
        for (let i=0; i< data.length; i++) {
            if (cardLists.includes(data[i].whichList) === false) {
@@ -9,8 +10,10 @@ function displayLists() {
            }
        }
       cardLists.forEach(function(item) {
-         $('#add-card-list').append (`
-            <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+         $('#add-card-list').append (`<div class="delete-list-div">
+         <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+         <button class="delete-list-button" onclick="deleteList('${item}')">Delete</button>
+         </div>
          `)
          });
    });
@@ -44,7 +47,6 @@ function addCardItem() {
  }
 
  function showList(Name) {
-     console.log('ping')
    addingToList = Name
    $('#card-list-title').html(`${Name} Card List`)
    $('.card-table-body').empty()
@@ -56,7 +58,7 @@ function addCardItem() {
                   <tr>
                      <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                      <td>${data[i].cardName}</td>
-                     <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
+                     <td><button id="show-card-list" class="add-to-table" onclick="showAddress(${data[i].id})">Show</button></td>
                      <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
                      <td><button id="delete-card-list" class="add-to-table" onclick="deleteCard(${data[i].id})">Delete</button></td>
                   </tr>
@@ -67,7 +69,7 @@ function addCardItem() {
                      <tr>
                         <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
                         <td>${data[i].cardName}</td>
-                        <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
+                        <td><button id="show-card-list" class="add-to-table" onclick="showAddress(${data[i].id})">Show</button></td>
                         <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
                         <td><button id="delete-card-list" class="add-to-table" onclick="deleteCard(${data[i].id})">Delete</button></td>
                      </tr>
@@ -76,15 +78,17 @@ function addCardItem() {
            }
        }
    })
+   $("#show-addresses-button").css('display', 'block')
    $('#show-card-details').css('display', 'block')
  }
 
 function addToCardList() {
     event.preventDefault()
     let listName = $('#add-to-card-list').val()
-    console.log(listName)
-    $('#add-card-list').append (`
-       <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    $('#add-card-list').append (`<div class="delete-list-div">
+    <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    <button class="delete-list-button" onclick="deleteList('${listName}')">Delete</button>
+    </div>
     `)
     $('#add-to-card-list').val('')
 }
@@ -103,7 +107,6 @@ function hideCompleted() {
 
 function deleteCard(id) {
    event.stopPropagation();
-   console.log(id)
    fetch(`/cardsList/${id}`, {
        method: 'DELETE'
    }).then(r=> {
@@ -117,15 +120,12 @@ function changeStatus(idStatus) {
    $.get("/cardsList", function (data) {
        for (i=0; i<data.length; i++) {
            if (data[i].id === idStatus) {
-               console.log('match')
                isComplete = data[i].complete
            }
        }
    })
    .then(r => {
-      console.log(isComplete)
        if (isComplete === true) {
-          console.log('true')
            fetch(`/cardsList/${idStatus}`, {
                method: "PUT",
                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -134,8 +134,6 @@ function changeStatus(idStatus) {
           showList(addingToList)
            })
        } else {
-          console.log('false')
-          console.log(idStatus)
            fetch(`/cardsList/${idStatus}`, {
                method: "PUT",
                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -146,6 +144,115 @@ function changeStatus(idStatus) {
        }
   })
 }
+
+function editCard (id) {
+    $.get("/cardsList", function (data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].id === id) {
+                $('#modal4-id').val(id)
+                $("#card-list").val(data[i].whichList)                
+                $("#card-name").val(data[i].cardName)               
+                $("#card-address").val(data[i].cardAddress)
+                $("#card-city").val(data[i].cardCity)             
+                $("#card-state").val(data[i].cardState)
+                $("#card-zipcode").val(data[i].cardZipCode)
+            }
+        }
+    }).then(r => {
+    $('.modal4').css('display', 'block')
+    })
+}
+
+function updateItem () {
+    let id = $("#modal4-id").val()
+    let list = $('#card-list').val()
+    let name = $('#card-name').val()
+    let address = $('#card-address').val()
+    let city = $('#card-city').val()
+    let state = $('#card-state').val()
+    let zipcode = $('#card-zipcode').val()
+    fetch(`/cardsList/${id}`, {
+        method: "PUT",
+        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        body: JSON.stringify({ cardZipCode: zipcode, cardState: state, cardcity: city, cardAddress: address, cardName: name, whichList: list})
+}).then(r=> {
+    $('.modal4').css('display', 'none')
+        $("#modal4-id").val('')
+        $('#card-list').val('')
+        $('#card-name').val('')
+        $('#card-address').val('')
+        $('#card-city').val('')
+        $('#card-state').val('')
+        $('#card-zipcode').val('')
+        showList(addingToList)
+    })
+}
+
+function deleteList(name) {
+    $.get("/cardsList", function (data) {
+        for (let i=0; i<data.length; i++) {
+            if (data[i].whichList === name){
+                let id = data[i].id
+                fetch(`/cardsList/${id}`, {
+                    method: 'DELETE'
+                })
+            }
+        }
+    })    
+.then(r=> {
+    cardLists = []
+    location.reload()  
+})     
+}
+
+function showAddresses() {
+    $('#showAddress').empty()
+    $.get("/cardsList", function (data) {
+        for (let i=0; i<data.length; i++) {
+            $('#showAddress').append(`
+                <tr>
+                    <td class='modal-row'>${data[i].cardName}</td>/button>
+                    <td class='modal-row'>${data[i].cardAddress}</td>/button>
+                    <td class='modal-row'>${data[i].cardCity}</td>/button>
+                    <td class='modal-row'>${data[i].cardState}</td>/button>
+                    <td class='modal-row'>${data[i].cardZipCode}</td>/button>
+                </tr>
+            `)
+            
+        }
+    })
+    $('.modal7').css('display', 'block')
+}
+
+function showAddress(id) {
+    $('#showAddress').empty()
+    $.get("/cardsList", function (data) {
+        for (let i=0; i<data.length; i++) {
+            if (data[i].id === id) {
+                $('#showAddress').append(`
+                    <tr>
+                        <td class='modal-row'>${data[i].cardName}</td>/button>
+                        <td class='modal-row'>${data[i].cardAddress}</td>/button>
+                        <td class='modal-row'>${data[i].cardCity}</td>/button>
+                        <td class='modal-row'>${data[i].cardState}</td>/button>
+                        <td class='modal-row'>${data[i].cardZipCode}</td>/button>
+                    </tr>
+                `)
+            }
+        }
+    })
+    $('.modal7').css('display', 'block')
+}
+
+function closeModal() {
+    $('.modal7').css('display', 'none')
+}
+
+
+
+
+
+
 
 
          //       // variable to link input fields for adding new list item

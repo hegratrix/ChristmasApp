@@ -105,9 +105,23 @@
     <div class='modal'>
         <label id="gift-question" for="gift name">What did you buy?</label>
         <input id="gift-title" type="text" placeholder="gift bought">
-        <input id="id-number" type="text">
-        <button id="modal-yay" onclick="addGiftToTable()">Yay!</button>
+        <input id="modal-id" class="id-number" type="text">
+        <button class="modal-button" onclick="addGiftToTable()">Yay!</button>
    </div>
+
+   <div class='modal2'>
+    <label class="question" for="gift name">What do you need to change?</label>
+    <label class="modal-label" for="gift name">List</label>
+    <input id="gift-list" class="modal-input" type="text">
+    <label class="modal-label" for="gift name">Name</label>
+    <input id="gift-name" class="modal-input" type="text">
+    <label class="modal-label" for="gift name">Budget</label>
+    <input id="gift-budget" class="modal-input" type="text">
+    <label class="modal-label" for="gift name">Gift</label>
+    <input id="gift-bought" class="modal-input" type="text">
+    <input id="modal-id" class="id-number" type="text">
+    <button class="modal-button" onclick="updateItem()">Update</button>
+</div>
    
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>

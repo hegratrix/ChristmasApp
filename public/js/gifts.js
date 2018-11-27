@@ -2,6 +2,7 @@ let giftLists = []
 let addingToList 
 
 function displayLists() {
+    giftLists = []
     $.get("/giftsList", function (data) {
         for (let i=0; i< data.length; i++) {
             if (giftLists.includes(data[i].whichList) === false) {
@@ -10,8 +11,11 @@ function displayLists() {
         }
         giftLists.forEach(function(item) {
             $('#add-gift-list').append (`
+                <div class="delete-list-div">
                 <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
-            `)
+                <button class="delete-list-button" onclick="deleteList('${item}')">Delete</button>
+                </div>
+                `)
         });
     });
 }
@@ -73,7 +77,10 @@ function addToGiftList() {
     event.preventDefault()
     let listName = $('#add-to-gift-list').val()
     $('#add-gift-list').append (`
-       <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    <div class="delete-list-div">
+                <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+                <button class="delete-list-button" onclick="deleteList('${listName}')">Delete</button>
+                </div>
     `)
     $('#add-to-gift-list').val('')
 }
@@ -131,7 +138,7 @@ function changeStatus(idStatus) {
 
 function openModal(id) {
     $('.modal').css('display', 'block')
-    $('#id-number').val(id)
+    $('#modal-id').val(id)
 }
 
 function addGiftToTable() {
@@ -143,15 +150,66 @@ function addGiftToTable() {
         body: JSON.stringify({ giftBought: gift })
     }).then(r=> {
         $('#gift-title').val('')
-        $('#id-number').val('')
+        $('#modal-id').val('')
         $('.modal').css('display', 'none')
         showList(addingToList)
     })
 }
 
+function editGiftItem (id) {
+    $.get("/giftsList", function (data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].id === id) {
+                $('#modal2-id').val(id)
+                $("#gift-list").val(data[i].whichList)                
+                $("#gift-name").val(data[i].giftName)               
+                $("#gift-budget").val(data[i].giftBudget)
+                $("#gift-bought").val(data[i].giftBought)
+            }
+        }
+    }).then(r => {
+    $('.modal2').css('display', 'block')
+    })
+}
 
+function updateItem () {
+    let id = $("#modal2-id").val()
+    let list = $('#gift-list').val()
+    let name = $('#gift-name').val()
+    let budget = $('#gift-budget').val()
+    let gift = $('#gift-bought').val()
+    fetch(`/giftsList/${id}`, {
+        method: "PUT",
+        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        body: JSON.stringify({ giftBought: gift, giftBudget: budget, giftName: name, whichList: list})
+}).then(r=> {
+    $('.modal2').css('display', 'none')
+        $("#modal2-id").val('')
+        $('#gift-list').val('')
+        $('#gift-name').val('')
+        $('#gift-budget').val('')
+        $('#gift-bought').val('')
+        showList(addingToList)
+    })
+}
 
-
+function deleteList(name) {
+    giftLists.splice(giftLists.indexOf(name), 1)
+    $.get("/giftsList", function (data) {
+        for (let i=0; i<data.length; i++) {
+            if (data[i].whichList === name){
+                let id = data[i].id
+                fetch(`/giftsList/${id}`, {
+                    method: 'DELETE'
+                })
+            }
+        }
+    })    
+.then(r=> {
+    giftLists = []
+    location.reload()  
+})     
+}
 
 
 

@@ -2,6 +2,8 @@ let groceryLists = []
 let addingToList 
 
 function displayLists() {
+    groceryLists = []
+    console.log(groceryLists)
     $.get("/groceryList", function (data) {
         for (let i=0; i< data.length; i++) {
             if (groceryLists.includes(data[i].whichList) === false) {
@@ -9,8 +11,10 @@ function displayLists() {
             }
         }
     groceryLists.forEach(function(item) {
-        $('#add-grocery-list').append (`
-            <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+        $('#add-grocery-list').append (`<div class="delete-list-div">
+        <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+        <button class="delete-list-button" onclick="deleteList('${item}')">Delete</button>
+        </div>
         `)
         });
     });
@@ -53,8 +57,6 @@ function showList(Name) {
              `)
             } else {
                 if (data[i].whichList === Name) {
-                    console.log(data[i].groceryName)
-                    console.log(data[i].groceryAmount)
                     $('.done-grocery-table-body').append(`
                     <tr>
                         <td><input class="checkbox" type="checkbox" name="bought" onchange="changeStatus(${data[i].id})"><br></td>
@@ -74,8 +76,10 @@ function showList(Name) {
 function addToGroceryList() {
     event.preventDefault()
     let listName = $('#add-to-grocery-list').val()
-    $('#add-grocery-list').append (`
-       <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    $('#add-grocery-list').append (`<div class="delete-list-div">
+    <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    <button class="delete-list-button" onclick="deleteList('${listName}')">Delete</button>
+    </div>
     `)
     $('#add-to-grocery-list').val('')
 }
@@ -105,18 +109,13 @@ function changeStatus(idStatus) {
     let isComplete 
     $.get("/groceryList", function (data) {
         for (i=0; i<data.length; i++) {
-            console.log(idStatus)
-            console.log(data[i].id)
             if (data[i].id === idStatus) {
-                console.log('match')
                 isComplete = data[i].complete
             }
         }
     })
     .then(r => {
-        console.log(isComplete)
         if (isComplete === true) {
-            console.log('true')
             fetch(`/groceryList/${idStatus}`, {
                 method: "PUT",
                 headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -125,7 +124,6 @@ function changeStatus(idStatus) {
            showList(addingToList)
             })
         } else {
-            console.log('false')
             fetch(`/groceryList/${idStatus}`, {
                 method: "PUT",
                 headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -137,8 +135,56 @@ function changeStatus(idStatus) {
    })
 }
 
+function editGroceryItem (id) {
+    $.get("/groceryList", function (data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].id === id) {
+                $('#modal6-id').val(id)
+                $("#grocery-list").val(data[i].whichList)                
+                $("#grocery-item").val(data[i].groceryName)               
+                $("#grocery-quantity").val(data[i].groceryAmount)
+            }
+        }
+    }).then(r => {
+    $('.modal6').css('display', 'block')
+    })
+}
 
+function updateItem () {
+    let id = $("#modal6-id").val()
+    let list = $('#grocery-list').val()
+    let item = $('#grocery-item').val()
+    let quantity = $('#grocery-quantity').val()
+    fetch(`/groceryList/${id}`, {
+        method: "PUT",
+        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        body: JSON.stringify({ groceryName: item, groceryAmount: quantity, whichList: list})
+}).then(r=> {
+    $('.modal6').css('display', 'none')
+        $("#modal6-id").val('')
+        $('#grocery-list').val('')
+        $('#grocery-item').val('')
+        $('#grocery-quantity').val('')
+        showList(addingToList)
+    })
+}
 
+function deleteList(name) {
+    $.get("/groceryList", function (data) {
+        for (let i=0; i<data.length; i++) {
+            if (data[i].whichList === name){
+                let id = data[i].id
+                fetch(`/groceryList/${id}`, {
+                    method: 'DELETE'
+                })
+            }
+        }
+    })    
+.then(r=> {
+    groceryLists = []
+    location.reload()
+})     
+}
 
             //    // event listeners for deleting, editing, and adding todos
             //    $(document).on("click", "button.delete", deleteTodo);

@@ -2,6 +2,7 @@ let recipeLists = []
 let addingToList 
 
 function displayLists() {
+    recipeLists = []
     $.get("/recipeList", function (data) {
         for (let i=0; i< data.length; i++) {
             if (recipeLists.includes(data[i].whichList) === false) {
@@ -9,8 +10,10 @@ function displayLists() {
             }
         }
     recipeLists.forEach(function(item) {
-        $('#add-recipe-list').append (`
-            <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+        $('#add-recipe-list').append (`<div class="delete-list-div">
+        <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+        <button class="delete-list-button" onclick="deleteList('${item}')">Delete</button>
+        </div>
         `)
         });
     });
@@ -82,8 +85,10 @@ function showList(Name) {
  function addToRecipeList() {
     event.preventDefault()
     let listName = $('#add-to-recipe-list').val()
-    $('#add-recipe-list').append (`
-       <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    $('#add-recipe-list').append (`<div class="delete-list-div">
+    <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    <button class="delete-list-button" onclick="deleteList('${listName}')">Delete</button>
+    </div>
     `)
     $('#add-to-recipe-list').val('')
 }
@@ -139,9 +144,62 @@ function changeStatus(idStatus) {
    })
 }
 
+function editRecipeItem (id) {
+    $.get("/recipeList", function (data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].id === id) {
+                $('#modal5-id').val(id)
+                $("#recipe-list").val(data[i].whichList)                
+                $("#recipe-image").val(data[i].recipeImage)               
+                $("#recipe-type").val(data[i].recipeName)
+                $("#recipe-link").val(data[i].recipeLink)
+                $("#recipe-makes").val(data[i].recipeMakes)
+            }
+        }
+    }).then(r => {
+    $('.modal5').css('display', 'block')
+    })
+}
 
+function updateItem () {
+    let id = $("#modal5-id").val()
+    let list = $('#recipe-list').val()
+    let image = $('#recipe-image').val()
+    let type = $('#recipe-type').val()
+    let link = $('#recipe-link').val()
+    let makes = $('#recipe-makes').val()
+    fetch(`/recipeList/${id}`, {
+        method: "PUT",
+        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        body: JSON.stringify({ whichList: list, recipeImage: image, recipeName: type, recipeLink: link, recipeMakes: makes})
+}).then(r=> {
+    $('.modal5').css('display', 'none')
+    $("#modal5-id").val('')
+$('#recipe-list').val('')
+$('#recipe-image').val('')
+$('#recipe-type').val('')
+$('#recipe-link').val('')
+$('#recipe-makes').val('')
+        showList(addingToList)
+    })
+}
 
-
+function deleteList(name) {
+    $.get("/recipeList", function (data) {
+        for (let i=0; i<data.length; i++) {
+            if (data[i].whichList === name){
+                let id = data[i].id
+                fetch(`/recipeList/${id}`, {
+                    method: 'DELETE'
+                })
+            }
+        }
+    })    
+.then(r=> {
+    recipeLists = []
+    location.reload()  
+})     
+}
 
         //   // variable to link input fields for adding new list item
         //   

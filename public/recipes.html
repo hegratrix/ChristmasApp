@@ -77,15 +77,16 @@
                                 <tbody class="recipe-table-body"></tbody>
                                 <tr>
                                     <td></td>
-                                    <td><input id="recipeImage" class="input-add-to-list" type="text" placeholder="image address"></td>
+                                    <td><input id="recipeImage" class="input-add-to-list" type="text" placeholder="*Image Address"></td>
                                     <td><input id="recipeType" class="input-add-to-list" type="text" placeholder="Type"></td>
                                     <td><input id="recipeLink" class="input-add-to-list" type="text" placeholder="Link"></td>
-                                    <td><input id="recipeMakes" class="input-add-to-list" type="text" placeholder="Makes?"></td>
+                                    <td><input id="recipeMakes" class="input-add-to-list" type="text" placeholder="Makes"></td>
                                     <td><button class="add-to-table" onclick="addRecipeItem()">Add</button></td>
                                     <td></td>
                                 </tr>
+                                
                             </table>                        
-                                    
+                            <p id="info">*right click the recipe picture to copy image address</p>
                     <button id="show-recipe" class="show-completed" onclick="showCompleted()">Show Completed</button>
                     <button id="hide-recipe" class="show-completed" onclick="hideCompleted()">Hide Completed</button>
                     
@@ -102,7 +103,21 @@
             </div>
         </div>
     </div>
-
+    <div class='modal5'>
+        <label class="question" for="recipe name">What do you need to change?</label>
+        <label class="modal-label" for="recipe name">List</label>
+        <input id="recipe-list" class="modal-input" type="text">
+        <label class="modal-label" for="recipe name">Image</label>
+        <input id="recipe-image" class="modal-input" type="text">
+        <label class="modal-label" for="recipe name">Type</label>
+        <input id="recipe-type" class="modal-input" type="text">
+        <label class="modal-label" for="recipe name">Link</label>
+        <input id="recipe-link" class="modal-input" type="text">
+        <label class="modal-label" for="recipe name">Makes</label>
+        <input id="recipe-makes" class="modal-input" type="text">
+        <input id="modal5-id" class="id-number" type="text">
+        <button class="modal-button" onclick="updateItem()">Update</button>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>
     <script src="./js/recipe.js"></script>

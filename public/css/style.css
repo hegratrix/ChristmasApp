@@ -266,7 +266,7 @@ th {
     display: none;
   }
 
-  #gift-question {
+  .question {
       font-size: 20px;
       color: white;
   }
@@ -275,7 +275,7 @@ th {
       color: darkgray;
   }
 
-  #modal-yay {
+  .modal-button {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -292,6 +292,84 @@ th {
     font-family: Arial, Helvetica, sans-serif;
   }
 
-#id-number {
+.id-number {
     display: none;
 }
+
+#show-addresses-button {
+    display: none;
+}
+
+.modal7 {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background: #b60a0a;
+    text-align: center;
+    border: 2px solid darkgreen;
+    width: 60%;
+    left: 20%;
+    padding: 15px;
+    z-index: 1;
+    top: 30%;
+    position: absolute;
+    height: auto;
+    display: none;
+}
+
+.modal-row {
+    padding: 13px;
+}
+
+.modal7.td {
+    padding: 10px;
+}
+
+.modal2, .modal3, .modal4, .modal5, .modal6 {
+    background: #b60a0a;
+    font-family: 'Mountains of Christmas', cursive;
+    text-align: center;
+    border: 2px solid darkgreen;
+    width: 30%;
+    left: 47%;
+    padding: 15px;
+    z-index: 1;
+    top: 30%;
+    position: absolute;
+    height: auto;
+    display: none;
+  }
+
+  .modal-input {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .modal-input::placeholder {
+      color: black;
+  }
+
+  .modal-label {
+      color:white;
+      font-size: 18px;
+  }
+
+  .delete-list-button {
+    margin-left: 45px;
+    height: 17px;
+    width: 36px;
+    font-size: 10px;
+    color: #375c00;
+    background-color: transparent;
+    border: 1px solid #375c00;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .delete-list-div {
+      display: inline;
+      justify-content: space-between;
+  }
+
+  #info {
+      font-size: 10px;
+      text-align: center;
+  }

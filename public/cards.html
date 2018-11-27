@@ -63,7 +63,7 @@
                         <li><a href="./calendar.html">Calendar</a></li>
                     </ul>                    
                     </div>
-                    <button class='add-to-list' onclick='showAddressList()'>Addresses</button>
+                    <button id="show-addresses-button" class='add-to-list' onclick='showAddresses()'>Addresses</button>
                     <h1 id="card-list-title" class="list-title">Click on a List to Start</h1>
                     <div id="show-card-details">
                             <h2 class='need-to-title'>Need To Send:</h2>
@@ -97,6 +97,28 @@
             </div>
         </div>
     </div>
+
+    <div class='modal4'>
+        <label class="question" for="card name">What do you need to change?</label>
+        <label class="modal-label" for="card name">List</label>
+        <input id="card-list" class="modal-input" type="text">
+        <label class="modal-label" for="card name">Name</label>
+        <input id="card-name" class="modal-input" type="text">
+        <label class="modal-label" for="card name">Address</label>
+        <input id="card-address" class="modal-input" type="text">
+        <label class="modal-label" for="card name">City</label>
+        <input id="card-city" class="modal-input" type="text">
+        <label class="modal-label" for="card name">State</label>
+        <input id="card-state" class="modal-input" type="text">
+        <label class="modal-label" for="card name">Zip Code</label>
+        <input id="card-zipcode" class="modal-input" type="text">
+        <input id="modal4-id" class="id-number" type="text">
+        <button class="modal-button" onclick="updateItem()">Update</button>
+    </div>
+    <div class='modal7'>
+        <div id="showAddress"></div>
+        <button class="modal-button" onclick="closeModal()">Close</button>
+   </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>

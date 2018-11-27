@@ -2,6 +2,7 @@ let wishLists = []
 let addingToList
 
 function displayLists() {
+   wishLists = []
    $.get("/wishList", function (data) {
       for (let i=0; i< data.length; i++) {
          if (wishLists.includes(data[i].whichList) === false) {
@@ -9,8 +10,10 @@ function displayLists() {
          }
       }
       wishLists.forEach(function(item) {
-         $('#add-wish-list').append (`
-            <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+         $('#add-wish-list').append (`<div class="delete-list-div">
+         <br><a class="added-to-list" onclick="showList('${item}')">${item}</a>
+         <button class="delete-list-button" onclick="deleteList('${item}')">Delete</button>
+         </div>
          `)
       });
    });
@@ -82,8 +85,10 @@ function showList(Name) {
 function addToWishList() {
    event.preventDefault()
    let listName = $('#add-to-wish-list').val()
-   $('#add-wish-list').append (`
-      <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+   $('#add-wish-list').append (`<div class="delete-list-div">
+   <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+   <button class="delete-list-button" onclick="deleteList('${listName}')">Delete</button>
+   </div>
    `)
    $('#add-to-wish-list').val('')
 }
@@ -115,15 +120,12 @@ function changeStatus(idStatus) {
    $.get("/wishList", function (data) {
        for (i=0; i<data.length; i++) {
            if (data[i].id === idStatus) {
-               console.log('match')
                isComplete = data[i].complete
            }
        }
    })
    .then(r => {
-      console.log(isComplete)
        if (isComplete === true) {
-          console.log('true')
            fetch(`/wishList/${idStatus}`, {
                method: "PUT",
                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -132,8 +134,6 @@ function changeStatus(idStatus) {
           showList(addingToList)
            })
        } else {
-          console.log('false')
-          console.log(idStatus)
            fetch(`/wishList/${idStatus}`, {
                method: "PUT",
                headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -145,7 +145,62 @@ function changeStatus(idStatus) {
   })
 }
 
+function editWishItem (id) {
+   $.get("/wishList", function (data) {
+       for (i=0; i<data.length; i++) {
+           if (data[i].id === id) {
+               $('#modal3-id').val(id)
+               $("#wish-list").val(data[i].whichList)                
+               $("#wish-item").val(data[i].itemName)               
+               $("#wish-store").val(data[i].itemLocation)
+               $("#wish-cost").val(data[i].itemPrice)
+               $("#wish-options").val(data[i].itemOptions)
+           }
+       }
+   }).then(r => {
+   $('.modal3').css('display', 'block')
+   })
+}
 
+function updateItem () {
+   let id = $("#modal3-id").val()
+   let list = $('#wish-list').val()
+   let item = $('#wish-item').val()
+   let store = $('#wish-store').val()
+   let cost = $('#wish-cost').val()
+   let options = $('#wish-options').val()
+   fetch(`/wishList/${id}`, {
+       method: "PUT",
+       headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+       body: JSON.stringify({ itemOptions: options, itemPrice: cost, itemLocation: store, itemName: item, whichList: list})
+}).then(r=> {
+   $('.modal3').css('display', 'none')
+       $("#modal3-id").val('')
+       $('#wish-list').val('')
+       $('#wish-item').val('')
+       $('#wish-store').val('')
+       $('#wish-cost').val('')
+       $('#wish-options').val('')
+       showList(addingToList)
+   })
+}
+
+function deleteList(name) {
+   $.get("/wishList", function (data) {
+       for (let i=0; i<data.length; i++) {
+           if (data[i].whichList === name){
+               let id = data[i].id
+               fetch(`/wishList/${id}`, {
+                   method: 'DELETE'
+               })
+           }
+       }
+   })    
+.then(r=> {
+   wishLists = []
+   location.reload() 
+})     
+}
 // function deleteWishNewItem(name) {
 //    event.stopPropagation();
 //    console.log('ping')
