@@ -36,7 +36,7 @@ function addWishItem() {
         <td><input type="checkbox" name="bought" value="false"><br></td>
         <td>${newItemNameInput}</td>
         <td>${newItemLocationInput}</td>
-        <td>${newItemPriceInput}</td>
+        <td>$${newItemPriceInput}</td>
         <td>${newItemOptionsInput}</td>
         <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
         <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
@@ -61,7 +61,7 @@ function showList(Name) {
                   <td><input type="checkbox" name="bought" value="false"><br></td>
                   <td>${data[i].itemName}</td>
                   <td>${data[i].itemLocation}</td>
-                  <td>${data[i].itemPrice}</td>
+                  <td>$${data[i].itemPrice}</td>
                   <td>${data[i].itemOptions}</td>
                   <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
                   <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>
@@ -74,7 +74,7 @@ function showList(Name) {
                         <td><input type="checkbox" name="bought" value="false"><br></td>
                         <td>${data[i].itemName}</td>
                         <td>${data[i].itemLocation}</td>
-                        <td>${data[i].itemPrice}</td>
+                        <td>$${data[i].itemPrice}</td>
                         <td>${data[i].itemOptions}</td>
                         <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
                         <td><button id="delete-wish-list" class="add-to-table" onclick="deleteWishItem()">Delete</button></td>

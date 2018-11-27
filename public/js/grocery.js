@@ -3,6 +3,7 @@ let addingToList
 
 function displayLists() {
     $.get("/groceryList", function (data) {
+        console.log(data)
         for (let i=0; i< data.length; i++) {
             if (groceryLists.includes(data[i].whichList) === false) {
                 groceryLists.push(data[i].whichList)
@@ -26,12 +27,12 @@ function addGroceryItem() {
         groceryItem: newGroceryItemInput,                          
         complete: false
    };
-   $.post("/grocerysList", grocery);  
+   $.post("/groceryList", grocery);  
    $('#grocery-table tr:last').before(`
       <tr>
          <td><input type="checkbox" name="bought" value="false"><br></td>
+         <td>${newGroceryItemInput}</td>
          <td>${newGroceryQuantityInput}</td>
-         <td>$${newGroceryItemInput}</td>
          <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
          <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
       </tr>
@@ -42,42 +43,59 @@ function addGroceryItem() {
 
 function showList(Name) {
     addingToList = Name
-    $('#gift-list-title').html(`${Name} Gift List`)
-    $('.gift-table-body').empty()
-    $('.done-gift-table-body').empty()
-    $.get("/giftsList", function (data) {
+    $('#grocery-list-title').html(`${Name} Grocery List`)
+    $('.grocery-table-body').empty()
+    $('.done-grocery-table-body').empty()
+    $.get("/groceryList", function (data) {
         for (let i=0; i<data.length; i++) {
             if (data[i].whichList === Name && data[i].complete === false) {
-                $('.gift-table-body').append(`
+                $('.grocery-table-body').append(`
                     <tr>
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
-                        <td>${data[i].giftName}</td>
-                        <td>$${data[i].giftBudget}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                        <td>${data[i].groceryName}</td>
+                        <td>${data[i].groceryAmount}</td>
+                        <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
+                        <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
                     </tr>
              `)
             } else {
                 if (data[i].whichList === Name) {
-                    $('.done-gift-table-body').append(`
+                    $('.done-grocery-table-body').append(`
                     <tr>
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
-                        <td>${data[i].giftName}</td>
-                        <td>${data[i].giftBought}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                        <td>${data[i].groceryName}</td>
+                        <td>${data[i].groceryAmount}</td>
+                        <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
+                        <td><button id="delete-grocery-list" class="add-to-table" onclick="deleteGroceryItem()">Delete</button></td>
                     </tr>
              `)
                 }
             }
         }
     })
-    $('#show-gift-details').css('display', 'block')
+    $('#show-grocery-details').css('display', 'block')
+}
 
+function addToGroceryList() {
+    event.preventDefault()
+    let listName = $('#add-to-grocery-list').val()
+    $('#add-grocery-list').append (`
+       <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    `)
+    $('#add-to-grocery-list').val('')
+}
 
+function showCompleted() {
+    $('#show-grocery-done').css('display', 'block')
+    $('#show-grocery').css('display', 'none')
+    $('#hide-grocery').css('display', 'block')
+}
 
-
-
+function hideCompleted() {
+    $('#show-grocery-done').css('display', 'none')
+    $('#show-grocery').css('display', 'block')
+    $('#hide-grocery').css('display', 'none')
+}
 
 
 

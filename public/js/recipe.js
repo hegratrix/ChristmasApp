@@ -16,7 +16,7 @@ function displayLists() {
     });
 }
 
-function addGiftItem() {
+function addRecipeItem() {
     event.preventDefault()
     var newRecipeImageInput = $("#recipeImage").val();
     var newRecipeNameInput = $("#recipeType").val();
@@ -27,20 +27,20 @@ function addGiftItem() {
         recipeImage: newRecipeImageInput,
         recipeName: newRecipeNameInput,
         recipeLink: newRecipeLinkInput,
-        newRecipeMakesInput: newRecipeMakesInput,         
+        recipeMakes: newRecipeMakesInput,         
         complete: false
    };
    $.post("/recipeList", recipe);  
    $('#recipe-table tr:last').before(`
       <tr>
          <td><input type="checkbox" name="bought" value="false"><br></td>
-         <td>${newRecipeImageInput}</td>
-         <td>$${newRecipeNameInput}</td>
-         <td>${newRecipeLinkInput}</td>
-         <td>$${newRecipeMakesInput}</td>
+         <td><img class="recipe-pic" src="${newRecipeImageInput}"></td>
+         <td>${newRecipeNameInput}</td>
+        <td><a href="${newRecipeLinkInput}">Recipe</a></td>
+        <td>${newRecipeLinkInput}</td>
+         <td>${newRecipeMakesInput}</td>
          <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
          <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
-      </tr>
    `)
    $("#recipeName").val('')
    $("#recipeBudget").val('')
@@ -48,37 +48,64 @@ function addGiftItem() {
 
 function showList(Name) {
     addingToList = Name
-    $('#gift-list-title').html(`${Name} Gift List`)
-    $('.gift-table-body').empty()
-    $('.done-gift-table-body').empty()
-    $.get("/giftsList", function (data) {
+    $('#recipe-list-title').html(`${Name} Recipe List`)
+    $('.recipe-table-body').empty()
+    $('.done-recipe-table-body').empty()
+    $.get("/recipeList", function (data) {
         for (let i=0; i<data.length; i++) {
             if (data[i].whichList === Name && data[i].complete === false) {
-                $('.gift-table-body').append(`
+                $('.recipe-table-body').append(`
                     <tr>
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
-                        <td>${data[i].giftName}</td>
-                        <td>$${data[i].giftBudget}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                        <td><img class="recipe-pic" src="${data[i].recipeImage}"></td>
+                        <td>${data[i].recipeName}</td>
+                        <td><a href="${data[i].recipeLink}">Recipe</a></td>
+                        <td>${data[i].recipeMakes}</td>
+                        <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
+                        <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
                     </tr>
              `)
             } else {
                 if (data[i].whichList === Name) {
-                    $('.done-gift-table-body').append(`
+                    $('.done-recipe-table-body').append(`
                     <tr>
                         <td><input type="checkbox" name="bought" value="complete"><br></td>
-                        <td>${data[i].giftName}</td>
-                        <td>${data[i].giftBought}</td>
-                        <td><button id="edit-gift-list" class="add-to-table" onclick="editGiftItem()">Edit</button></td>
-                        <td><button id="delete-gift-list" class="add-to-table" onclick="deleteGiftItem()">Delete</button></td>
+                        <td><img class="recipe-pic" src="${data[i].recipeImage}"></td>
+                        <td>${data[i].recipeName}</td>
+                        <td><a href="${data[i].recipeLink}">Recipe</a></td>
+                        <td>${data[i].recipeMakes}</td>
+                        <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipeItem()">Edit</button></td>
+                        <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipeItem()">Delete</button></td>
                     </tr>
              `)
                 }
             }
         }
     })
-    $('#show-gift-details').css('display', 'block')
+    $('#show-recipe-details').css('display', 'block')
+ }
+
+ function addToRecipeList() {
+    event.preventDefault()
+    let listName = $('#add-to-recipe-list').val()
+    $('#add-recipe-list').append (`
+       <br><a class="added-to-list" onclick="showList('${listName}')">${listName}</a>
+    `)
+    $('#add-to-recipe-list').val('')
+}
+
+function showCompleted() {
+    $('#show-recipe-done').css('display', 'block')
+    $('#show-recipe').css('display', 'none')
+    $('#hide-recipe').css('display', 'block')
+}
+
+function hideCompleted() {
+    $('#show-recipe-done').css('display', 'none')
+    $('#show-recipe').css('display', 'block')
+    $('#hide-recipe').css('display', 'none')
+}
+
 
 
 

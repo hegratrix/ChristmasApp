@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Mountains+of+Christmas" rel="stylesheet">
     <link rel="stylesheet" href="./css/app.css">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Gifts</title>
+    <title>Recipes</title>
 </head>
 <body>
     <div class='grid-y grid-frame'>
@@ -48,8 +48,8 @@
                     <h1 class="list-title">Lists</h1><hr class='hr'>
                     <div id='add-recipe-list'>
                     </div>
-                    <input id="add-to-gift-list" class="input-add-to-list" type="text" placeholder="List Title">
-                    <button class='add-to-list' onclick='addToRecipeGiftList()'>New List</button>
+                    <input id="add-to-recipe-list" class="input-add-to-list" type="text" placeholder="List Title">
+                    <button class='add-to-list' onclick='addToRecipeList()'>New List</button>
                 </div>
                 <div class='main-content-div medium-7 cell'>
                         <div class="header-tabs">
@@ -68,40 +68,35 @@
                             <table id="recipe-table">
                                 <tr>
                                     <th>Made</th>
-                                    <th>Picture</th>
+                                    <th>Image</th>
                                     <th>Type</th>
                                     <th>Link</th>
                                     <th>Makes</th>
                                 </tr>
+                                <tbody class="recipe-table-body"></tbody>
                                 <tr>
-                                    <td><input type="checkbox" name="bought" value="false"><br></td>
+                                    <td></td>
                                     <td><input id="recipeImage" type="text" placeholder="image address"></td>
                                     <td><input id="recipeType" type="text" placeholder="Type"></td>
                                     <td><input id="recipeLink" type="text" placeholder="Link"></td>
                                     <td><input id="recipeMakes" type="text" placeholder="Makes?"></td>
-                                    <td><button class="add-to-table" onclick="addRecipe()">Add</button></td>
+                                    <td><button class="add-to-table" onclick="addRecipeItem()">Add</button></td>
                                     <td></td>
                                 </tr>
                             </table>                        
-                                <div class='medium-2 cell'></div>
-                                <div class='medium-2 cell'></div>
-                                <div class='medium-1 cell'></div>
-                            </div> 
+                                    
+                    <button id="show-recipe" class="show-completed" onclick="showCompleted()">Show Completed</button>
+                    <button id="hide-recipe" class="show-completed" onclick="hideCompleted()">Hide Completed</button>
+                    
                         </div>
                         <div id="show-recipe-done">
                             <table id="recipe-table-done">
-                                <tr>
+                                <!-- <tr>
                                     <th>Image</th>
                                     <th>Item</th>
                                     <th>Link</th>
-                                </tr>
-                                <tr>
-                                    <td><img class="recipe-pic" src="https://images-gmi-pmc.edge-generalmills.com/b5188530-306c-4ce0-a0e4-4e5b75e5b495.jpg" alt=""></td>
-                                    <td>candy canes</td>
-                                    <td><a href="https://www.bettycrocker.com/recipes/candy-cane-cookies/93832e29-3b4f-4977-ae5a-9820053b254c">Recipe</a></td>
-                                    <td><button id="edit-recipe-list" class="add-to-table" onclick="editRecipe()">Edit</button></td>
-                                    <td><button id="delete-recipe-list" class="add-to-table" onclick="deleteRecipe()">Delete</button></td>
-                                </tr>
+                                </tr> -->
+                                <tbody class="done-recipe-table-body"></tbody>
                             </table> 
                         </div>
                     </div>
@@ -124,3 +119,5 @@
     </script>
 </body>
 </html>
+
+<a href=""></a>

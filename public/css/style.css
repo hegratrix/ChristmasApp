@@ -135,7 +135,7 @@ table {
     display: none;
 }
 
-#show-shopping-details, #show-shopping-done {
+#show-grocery-details, #show-grocery-done {
     display: none;
 }
 
@@ -221,6 +221,6 @@ td {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#hide-gift, #hide-wish, #hide-card {
+#hide-gift, #hide-wish, #hide-card, #hide-recipe, #hide-grocery {
     display: none;
 }
