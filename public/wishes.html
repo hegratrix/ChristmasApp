@@ -50,7 +50,7 @@
                     <hr class='hr'>
                     <div id='add-wish-list'>
                     </div>
-                    <input id="add-to-wish-list" class="input-add-to-list" type="text" placeholder="List Title">
+                    <input id="add-to-wish-list" class="input-add-list" type="text" placeholder="List Title">
                     <button class='add-to-list' onclick='addToWishList()'>New List</button>
                 </div>
                 <div class='main-content-div medium-7 cell'>
@@ -67,9 +67,11 @@
                     </div>
                     <h1 id="wish-list-title" class="list-title">Click on a List to Start</h1>
                     <div id="show-wish-details">
+                        
+                            <h2 class='need-to-title'>Wish Items To Buy:</h2>
                         <table id="wish-table">
                             <tr>
-                                <th>Bought</th>
+                                <th></th>
                                 <th>Item</th>
                                 <th>Store/Website</th>
                                 <th>Cost</th>
@@ -78,10 +80,10 @@
                             <tbody class="wish-table-body"></tbody>
                             <tr>
                                     <td></td>
-                                    <td><input id="wishItem" class="input-add-item" type="text" placeholder="Item"></td>
-                                    <td><input id="wishStore" class="input-add-item" type="text" placeholder="Store/Website"></td>
-                                    <td><input id="wishCost" class="input-add-item" type="text" placeholder="Cost"></td>
-                                    <td><input id="wishOptions" class="input-add-item" type="text" placeholder="Options"></td>
+                                    <td><input id="wishItem" class="input-add-to-list" type="text" placeholder="Item"></td>
+                                    <td><input id="wishStore" class="input-add-to-list" type="text" placeholder="Store/Website"></td>
+                                    <td><input id="wishCost" class="input-add-to-list" type="text" placeholder="Cost"></td>
+                                    <td><input id="wishOptions" class="input-add-to-list" type="text" placeholder="Options"></td>
                                     <td><button class="add-to-table" onclick="addWishItem()">Add</button></td>
                                     <td></td>
                                 </tr>
@@ -90,13 +92,8 @@
                         <button id="hide-wish" class="show-completed" onclick="hideCompleted()">Hide Completed</button>                                
                     </div>
                     <div id="show-wish-done">
+                            <h2 class='need-to-title'>Wish Items Bought:</h2>
                         <table id="wish-table-done">
-                            <!-- <tr>
-                                <th>Item</th>
-                                <th>Store/Website</th>
-                                <th>Cost</th>
-                                <th>Options</th>
-                            </tr> -->
                             <tbody class="done-wish-table-body"></tbody>
                         </table> 
                     </div>

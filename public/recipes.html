@@ -48,7 +48,7 @@
                     <h1 class="list-title">Lists</h1><hr class='hr'>
                     <div id='add-recipe-list'>
                     </div>
-                    <input id="add-to-recipe-list" class="input-add-to-list" type="text" placeholder="List Title">
+                    <input id="add-to-recipe-list" class="input-add-list" type="text" placeholder="List Title">
                     <button class='add-to-list' onclick='addToRecipeList()'>New List</button>
                 </div>
                 <div class='main-content-div medium-7 cell'>
@@ -65,6 +65,7 @@
                         </div>
                     <h1 id="recipe-list-title" class="list-title">Click on a List to Start</h1>
                     <div id="show-recipe-details">
+                            <h2 class='need-to-title'>Recipes to Make:</h2>
                             <table id="recipe-table">
                                 <tr>
                                     <th>Made</th>
@@ -76,10 +77,10 @@
                                 <tbody class="recipe-table-body"></tbody>
                                 <tr>
                                     <td></td>
-                                    <td><input id="recipeImage" type="text" placeholder="image address"></td>
-                                    <td><input id="recipeType" type="text" placeholder="Type"></td>
-                                    <td><input id="recipeLink" type="text" placeholder="Link"></td>
-                                    <td><input id="recipeMakes" type="text" placeholder="Makes?"></td>
+                                    <td><input id="recipeImage" class="input-add-to-list" type="text" placeholder="image address"></td>
+                                    <td><input id="recipeType" class="input-add-to-list" type="text" placeholder="Type"></td>
+                                    <td><input id="recipeLink" class="input-add-to-list" type="text" placeholder="Link"></td>
+                                    <td><input id="recipeMakes" class="input-add-to-list" type="text" placeholder="Makes?"></td>
                                     <td><button class="add-to-table" onclick="addRecipeItem()">Add</button></td>
                                     <td></td>
                                 </tr>
@@ -90,12 +91,8 @@
                     
                         </div>
                         <div id="show-recipe-done">
+                                <h2 class='need-to-title'>Recipes Made:</h2>
                             <table id="recipe-table-done">
-                                <!-- <tr>
-                                    <th>Image</th>
-                                    <th>Item</th>
-                                    <th>Link</th>
-                                </tr> -->
                                 <tbody class="done-recipe-table-body"></tbody>
                             </table> 
                         </div>

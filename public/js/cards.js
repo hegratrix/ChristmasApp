@@ -35,7 +35,7 @@ function addCardItem() {
    $.post("/cardsList", card);
    $('#card-table tr:last').after(`
       <tr>
-         <td><input type="checkbox" name="bought" value="false"><br></td>
+         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
          <td>${newCardNameInput}</td>
          <td><button id="show-card-list" class="add-to-table" onclick="showCard()">Show</button></td>
          <td><button id="edit-wish-list" class="add-to-table" onclick="editWishItem()">Edit</button></td>
@@ -59,7 +59,7 @@ function addCardItem() {
            if (data[i].whichList === Name && data[i].complete === false) {
                $('.card-table-body').append(`
                   <tr>
-                     <td><input type="checkbox" name="bought" value="false"><br></td>
+                     <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
                      <td>${data[i].cardName}</td>
                      <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
                      <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>
@@ -70,7 +70,7 @@ function addCardItem() {
                if (data[i].whichList === Name) {
                    $('.done-card-table-body').append(`
                      <tr>
-                        <td><input type="checkbox" name="bought" value="false"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
                         <td>${data[i].cardName}</td>
                         <td><button id="show-card-list" class="add-to-table" onclick="showCard(${data[i].id})">Show</button></td>
                         <td><button id="edit-card-list" class="add-to-table" onclick="editCard(${data[i].id})">Edit</button></td>

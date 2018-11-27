@@ -119,6 +119,18 @@ table {
     font-size: 14px;
 }
 
+table tbody td, table tbody th {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white;
+    border: white;
+    text-align: left;
+}
+
+.checkbox {
+    margin-right: 13px;
+}
+
 #show-gift-details, #show-gift-done {
     display: none;
 }
@@ -143,11 +155,6 @@ table {
     margin-left: 10px;
     font-family: 'Aref Ruqaa', serif;
     font-size: 20px;
-}
-
-th {
-    text-align: left;
-    /* border-bottom: 1px solid #b60a0a; */
 }
 
 .recipe-pic {
@@ -177,17 +184,23 @@ th {
 }
 
 .input-add-to-list {
+    width: 100%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    height: 25px;
+}
+
+.input-add-list {
     width: 65%;
     display: block;
     margin-right: auto;
     margin-left: auto;
     margin-top: 35px;
     margin-bottom: 5px;
-    font-size: 12px;
-    height: 25px;
-}
-
-.input-add-item {
     font-size: 12px;
     height: 25px;
 }
@@ -209,16 +222,25 @@ td {
 }
 
 .show-completed {
+    margin-bottom: 20px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    height: 40px;
-    width: 120px;
+    height: 35px;
+    width: 110px;
     font-size: 13px;
     color: white;
     background-color: #375c00;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.grid-x {
+    padding: 0;
+}
+
+th {
+    font-weight: bold;
 }
 
 #hide-gift, #hide-wish, #hide-card, #hide-recipe, #hide-grocery {

@@ -33,7 +33,7 @@ function addWishItem() {
   $.post("/wishList", wish);
   $('#wish-table tr:last').before(`
      <tr>
-        <td><input type="checkbox" name="bought" value="false"><br></td>
+        <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
         <td>${newItemNameInput}</td>
         <td>${newItemLocationInput}</td>
         <td>$${newItemPriceInput}</td>
@@ -58,7 +58,7 @@ function showList(Name) {
          if (data[i].whichList === Name && data[i].complete === false) {
             $('.wish-table-body').append(`
                <tr>
-                  <td><input type="checkbox" name="bought" value="false"><br></td>
+                  <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
                   <td>${data[i].itemName}</td>
                   <td>${data[i].itemLocation}</td>
                   <td>$${data[i].itemPrice}</td>
@@ -71,7 +71,7 @@ function showList(Name) {
             if (data[i].whichList === Name) {
                   $('.done-wish-table-body').append(`
                      <tr>
-                        <td><input type="checkbox" name="bought" value="false"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
                         <td>${data[i].itemName}</td>
                         <td>${data[i].itemLocation}</td>
                         <td>$${data[i].itemPrice}</td>

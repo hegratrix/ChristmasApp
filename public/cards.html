@@ -48,7 +48,7 @@
                     <h1 class="list-title">Lists</h1><hr class='hr'>
                     <div id='add-card-list'>
                     </div>
-                    <input id="add-to-card-list" class="input-add-to-list" type="text" placeholder="List Title">
+                    <input id="add-to-card-list" class="input-add-list" type="text" placeholder="List Title">
                     <button class='add-to-list' onclick='addToCardList()'>New List</button>
                 </div>
                 <div class='main-content-div medium-7 cell'>
@@ -66,29 +66,28 @@
                     <button class='add-to-list' onclick='showAddressList()'>Addresses</button>
                     <h1 id="card-list-title" class="list-title">Click on a List to Start</h1>
                     <div id="show-card-details">
+                            <h2 class='need-to-title'>Need To Send:</h2>
                             <table id="card-table">
                                 <tr>
-                                    <th>Sent</th>
+                                    <th></th>
                                     <th>Name</th>
                                 </tr>
                                 <tbody class="card-table-body"></tbody>
                             </table>                        
                             <div class='grid-x'>
-                                <div class='medium-3 cell'><input id="cardName" type="text" placeholder="Name"></div>
-                                <div class='medium-3 cell'><input id="cardAddress" type="text" placeholder="Address"></div>
-                                <div class='medium-2 cell'><input id="cardCity" type="text" placeholder="City"></div>
-                                <div class='medium-1 cell'><input id="cardState" type="text" placeholder="State"></div>
-                                <div class='medium-1 cell'><input id="cardZipCode" type="text" placeholder="Zip Code"></div>
+                                <div class='medium-3 cell'><input id="cardName" class="input-add-to-list" type="text" placeholder="Name"></div>
+                                <div class='medium-3 cell'><input id="cardAddress" class="input-add-to-list" type="text" placeholder="Address"></div>
+                                <div class='medium-2 cell'><input id="cardCity" class="input-add-to-list" type="text" placeholder="City"></div>
+                                <div class='medium-1 cell'><input id="cardState" class="input-add-to-list" type="text" placeholder="State"></div>
+                                <div class='medium-1 cell'><input id="cardZipCode" class="input-add-to-list" type="text" placeholder="Zip Code"></div>
                                 <div class='medium-2 cell'><button class="add-to-table" onclick="addCardItem()">Add</button></div>
                             </div> 
                             <button id="show-card" class="show-completed" onclick="showCompleted()">Show Completed</button>
                             <button id="hide-card" class="show-completed" onclick="hideCompleted()">Hide Completed</button>                
                         </div>
                         <div id="show-card-done">
+                                <h2 class='need-to-title'>Cards Sent:</h2>
                             <table id="card-table-done">
-                                <!-- <tr>
-                                    <th>Name</th>
-                                </tr> -->
                                 <tbody class="done-card-table-body"></tbody>
                             </table> 
                         </div>

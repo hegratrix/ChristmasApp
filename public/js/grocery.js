@@ -29,7 +29,7 @@ function addGroceryItem() {
    $.post("/groceryList", grocery);  
    $('#grocery-table tr:last').before(`
       <tr>
-         <td><input type="checkbox" name="bought" value="false"><br></td>
+         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
          <td>${newGroceryItemInput}</td>
          <td>${newGroceryQuantityInput}</td>
          <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem()">Edit</button></td>
@@ -50,7 +50,7 @@ function showList(Name) {
             if (data[i].whichList === Name && data[i].complete === false) {
                 $('.grocery-table-body').append(`
                     <tr>
-                        <td><input type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
                         <td>${data[i].groceryName}</td>
                         <td>${data[i].groceryAmount}</td>
                         <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem(${data[i].id})">Edit</button></td>
@@ -61,7 +61,7 @@ function showList(Name) {
                 if (data[i].whichList === Name) {
                     $('.done-grocery-table-body').append(`
                     <tr>
-                        <td><input type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
                         <td>${data[i].groceryName}</td>
                         <td>${data[i].groceryAmount}</td>
                         <td><button id="edit-grocery-list" class="add-to-table" onclick="editGroceryItem(${data[i].id})">Edit</button></td>

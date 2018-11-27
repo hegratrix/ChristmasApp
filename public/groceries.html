@@ -48,7 +48,7 @@
                     <h1 class="list-title">Lists</h1><hr class='hr'>
                     <div id='add-grocery-list'>
                     </div>
-                    <input id="add-to-grocery-list" class="input-add-to-list" type="text" placeholder="List Title">
+                    <input id="add-to-grocery-list" class="input-add-list" type="text" placeholder="List Title">
                     <button class='add-to-list' onclick='addToGroceryList()'>New List</button>
                 </div>
                 <div class='main-content-div medium-7 cell'>
@@ -65,17 +65,18 @@
                     </div>
                     <h1 id="grocery-list-title" class="list-title">Click on a List to Start</h1>
                     <div id="show-grocery-details">
+                            <h2 class='need-to-title'>Groceries To Buy:</h2>
                             <table id="grocery-table">
                                 <tr>
-                                    <th>Bought</th>
+                                    <th></th>
                                     <th>Item</th>
                                     <th>Quantity</th>
                                 </tr>
                                 <tbody class="grocery-table-body"></tbody>
                                 <tr>
                                     <td><input type="checkbox" name="bought" value="false"><br></td>
-                                    <td><input id="groceryItem" type="text" placeholder="Item"></td>
-                                    <td><input id="groceryQuantity" type="text" placeholder="Quantity"></td>
+                                    <td><input id="groceryItem" class="input-add-to-list" type="text" placeholder="Item"></td>
+                                    <td><input id="groceryQuantity" class="input-add-to-list" type="text" placeholder="Quantity"></td>
                                     <td><button type="submit" class="add-to-table" onclick="addGroceryItem()">Add</button></td>
                                     <td></td>
                                 </tr>
@@ -86,11 +87,8 @@
                     
                         </div>
                         <div id="show-grocery-done">
+                                <h2 class='need-to-title'>Groceries Bought:</h2>
                             <table id="grocery-table-done">
-                                <!-- <tr>
-                                    <th></th>
-                                    <th>Item</th>
-                                </tr> -->
                                 <tbody class="done-grocery-table-body"></tbody>
                             </table> 
                         </div>

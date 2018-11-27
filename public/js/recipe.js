@@ -33,7 +33,7 @@ function addRecipeItem() {
    $.post("/recipeList", recipe);  
    $('#recipe-table tr:last').before(`
       <tr>
-         <td><input type="checkbox" name="bought" value="false"><br></td>
+         <td><input class="checkbox" type="checkbox" name="bought" value="false"><br></td>
          <td><img class="recipe-pic" src="${newRecipeImageInput}"></td>
          <td>${newRecipeNameInput}</td>
         <td><a href="${newRecipeLinkInput}">Recipe</a></td>
@@ -57,7 +57,7 @@ function showList(Name) {
             if (data[i].whichList === Name && data[i].complete === false) {
                 $('.recipe-table-body').append(`
                     <tr>
-                        <td><input type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
                         <td><img class="recipe-pic" src="${data[i].recipeImage}"></td>
                         <td>${data[i].recipeName}</td>
                         <td><a href="${data[i].recipeLink}">Recipe</a></td>
@@ -70,7 +70,7 @@ function showList(Name) {
                 if (data[i].whichList === Name) {
                     $('.done-recipe-table-body').append(`
                     <tr>
-                        <td><input type="checkbox" name="bought" value="complete"><br></td>
+                        <td><input class="checkbox" type="checkbox" name="bought" value="complete"><br></td>
                         <td><img class="recipe-pic" src="${data[i].recipeImage}"></td>
                         <td>${data[i].recipeName}</td>
                         <td><a href="${data[i].recipeLink}">Recipe</a></td>
