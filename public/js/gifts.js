@@ -178,10 +178,10 @@ function updateItem () {
     let name = $('#gift-name').val()
     let budget = $('#gift-budget').val()
     let gift = $('#gift-bought').val()
-    console.log(gift)
+    console.log(id)
     fetch(`/giftsList/${id}`, {
         method: "PUT",
-        headers: { 'Content-Type' : 'application/json; charset=utf-8'},
+        headers: { 'Content-Type' : 'application/json; charset=utf-8' },
         body: JSON.stringify({ giftBought: gift, giftBudget: budget, giftName: name, whichList: list})
 }).then(r=> {
     $('.modal2').css('display', 'none')
