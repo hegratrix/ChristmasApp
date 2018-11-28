@@ -143,7 +143,7 @@ function openModal(id) {
 
 function addGiftToTable() {
     let gift = $('#gift-title').val()
-    let id = $('#id-number').val()
+    let id = $('#modal-id').val()
     fetch(`/giftsList/${id}`, {
         method: "PUT",
         headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -178,6 +178,7 @@ function updateItem () {
     let name = $('#gift-name').val()
     let budget = $('#gift-budget').val()
     let gift = $('#gift-bought').val()
+    console.log(gift)
     fetch(`/giftsList/${id}`, {
         method: "PUT",
         headers: { 'Content-Type' : 'application/json; charset=utf-8'},
@@ -189,7 +190,7 @@ function updateItem () {
         $('#gift-name').val('')
         $('#gift-budget').val('')
         $('#gift-bought').val('')
-        location.reload()
+        showList(addingToList)
     })
 }
 
@@ -207,7 +208,7 @@ function deleteList(name) {
     })    
 .then(r=> {
     giftLists = []
-    location.reload()  
+    showList(addingToList)
 })     
 }
 

@@ -44,7 +44,8 @@ module.exports = function (app) {
     // PUT route for updating gifts
     app.put("/giftsList/:id", function (req, res) {          
         db.giftsList.update(req.body, { where: { id: req.params.id }})
-        .then(() => res.sendStatus(200))
-        .catch(e => console.log(e))
+        .then(function (dbGift) {
+            res.json(dbGift);
+        })
     });
 }  
