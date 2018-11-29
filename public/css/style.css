@@ -262,7 +262,7 @@ th {
     top: 30%;
     position: absolute;
     height: 260px;
-    display: none;
+    display: block;
   }
 
   .question {
@@ -437,6 +437,9 @@ th {
     color: white;
     font-size: 19px;
     padding: 8px;
-    /* height: 20px;
-    width: 30px; */
+}
+
+#gift-question {
+    color: white;
+    font-size: 27px;
 }

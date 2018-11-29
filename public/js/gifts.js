@@ -211,33 +211,3 @@ function deleteList(name) {
     showList(addingToList)
 })     
 }
-
-
-
-// // // variable to link list results to html
-// // var $todoContainer = $(".todo-container");
-
-// // event listeners for deleting, editing, and adding todos
-// // $(document).on("click", "button.delete", deleteTodo);
-// $(document).on("click", "button.complete", toggleComplete);
-
-// initial list todos array
-// var todos = [];
-
-// grabs todo list from database when page loads
-// getTodos();
-
-
-
-
-
-
-
-// // toggles strike-through to indicate completed status
-// function toggleComplete(event) {
-//      event.stopPropagation();
-//      var todo = $(this).parent().data("todo");
-//      todo.complete = !todo.complete;
-//      updateTodo(todo);
-// }
-

@@ -50,23 +50,3 @@ module.exports = function (app) {
           });
       });
 }
-
-
-
-
-
-
-
-
-//    // PUT route for updating cards
-
-//    app.put("/cardsList", function (req, res) {          
-//         db.cardsList.update({
-//              cardName: req.body.cardName,
-//              cardAddress: req.body.cardAddress,
-//              complete: req.body.complete
-//         }, { where: { id: req.body.id }
-//              }).then(function (dbCard) {
-//                   res.json(dbCard);
-//              });
-//    });

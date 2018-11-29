@@ -9,4 +9,4 @@ app.use(bodyparser.json())
 
 require('./routes')(app)
 
-require('./models').sequelize.sync().then(() => app.listen(3000, () => console.log('http://localhost:3000')))
+require('./models').sequelize.sync().then(() => app.listen(Process.env.port||3000, () => console.log('http://localhost:3000')))
