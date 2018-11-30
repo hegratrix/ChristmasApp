@@ -1,5 +1,5 @@
 {
-  "name": "groupproject2-testing",
+  "name": "ChristmasApp",
   "version": "1.0.0",
   "description": "Test version of Group Project #2 for UCI coding bootcamp.",
   "main": "server.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcusmcb/GroupProject2-Testing.git"
+    "url": "git+https://github.com/hegratrix/ChristmasApp"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marcusmcb/GroupProject2-Testing/issues"
+    "url": "https://github.com/hegratrix/ChristmasApp"
   },
-  "homepage": "https://github.com/marcusmcb/GroupProject2-Testing#readme",
+  "homepage": "https://github.com/hegratrix/ChristmasApp",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
